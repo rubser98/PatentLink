@@ -3,7 +3,7 @@ import 'bulma/css/bulma.css'
 import { useState, useEffect } from 'react'
 import Web3 from 'web3'
 import styles from '../styles/homeSale.module.css'
-import vmContract from '../../blockchain/vending'
+import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 const vendite = () =>  {
     
     const [error, setError] = useState('')
@@ -26,7 +26,7 @@ const vendite = () =>  {
         const accounts = await web3.eth.getAccounts() 
         console.log(accounts)
         console.log(accounts[0])
-        var count = await vmContract.methods.balanceOf(accounts[0]).call()
+        var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
         count = Number(count)
         count = count*0.000000000000000001
         console.log(count)
@@ -55,14 +55,14 @@ const vendite = () =>  {
             to:  "0x1729c516755eE568c59c5deb315971F24a3705fA", //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
             gas: '300000',  // Gas limit
             
-            data: vmContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
+            data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
           };
           const result = await ethereum.request({
             value : web3.utils.toWei(etherCount, "ether"),
             method: 'eth_sendTransaction',
             params: [transactionObject],
           });
-        /*await vmContract.methods.buyToken(Number(buyCount)).send({
+        /*await patentTokenContract.methods.buyToken(Number(buyCount)).send({
             from : accounts[0],
             value : web3.utils.toWei(etherCount, "ether"),
             gas: 50000,
@@ -87,7 +87,7 @@ const vendite = () =>  {
         try
         {
         
-        const totale2 = await vmContract.methods.totalSupply().call()
+        const totale2 = await patentTokenContract.methods.totalSupply().call()
         
         setTotale((Number(totale2)/1000000000000000000).toFixed(0))
       

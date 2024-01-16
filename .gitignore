@@ -1,3 +1,5 @@
 **/node_modules
 node_modules/
 /node_modules
+patent/build/
+patent_app/.next/

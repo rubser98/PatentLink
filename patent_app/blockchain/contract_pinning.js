@@ -15,7 +15,7 @@ const patentTokenContract = new web3.eth.Contract(PATENT_TOKEN_CONTRACT_ABI, PAT
 
 const NFT_CONTRACT_ADDRESS = patentNFTConf.networks['5777'].address;
 const NFT_CONTRACT_ABI = patentNFTConf.abi;
-const patentNFTContract = new web3.eth.Contract(PATENT_TOKEN_CONTRACT_ABI, PATENT_TOKEN_CONTRACT_ADDRESS);
+const patentNFTContract = new web3.eth.Contract(NFT_CONTRACT_ABI, NFT_CONTRACT_ADDRESS);
 
 
 export {patentTokenContract, patentNFTContract};

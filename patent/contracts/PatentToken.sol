@@ -33,10 +33,11 @@ contract PatentToken is ERC20{
     ///@notice It allows sender to purchase PTNT
     ///@param amount amount of PTNT to purchase
     function buyToken(uint amount) public payable{
-        require(balanceOf(owner) >= amount*1000000, 'Not enough PTNT in the economy');
-        //require(msg.value > amount * 1 ether,'Not enough ETH to buy PTNT');
-        emit BuyPTNT(msg.sender, amount*1000000);
-        _transfer(owner,msg.sender,amount*1000000);
+        require(amount > 0, 'No amount of PTNT are specified');
+        require(balanceOf(owner) >= amount, 'Not enough PTNT in the economy');
+        require(msg.value > amount,'Not enough ETH to buy PTNT');
+        emit BuyPTNT(msg.sender, amount);
+        _transfer(owner,msg.sender,amount);
     }
 
     ///@notice It allows sender to convert PTNT into ETH
@@ -53,7 +54,7 @@ contract PatentToken is ERC20{
     ///@notice Sender pay filingFee to file patent
     ///@param _sender address of account which pay the fee
     function payFilingFee(address _sender) external returns(bool){
-        require(balanceOf(_sender)> filingFee,'Not enough PTNT to pay filing fee');
+        require(balanceOf(_sender) >= filingFee,'Not enough PTNT to pay filing fee');
         _transfer(_sender, owner, filingFee);
         return true;
     }
@@ -62,6 +63,10 @@ contract PatentToken is ERC20{
     ///@param amount new price of filing fee
     function setFilingFee(uint amount) public onlyOwner{
         filingFee = amount;
+    }
+
+    function getFilingFee() public view returns(uint){
+        return filingFee;
     }
 
     ///@notice emit PTNT 

@@ -34,7 +34,6 @@ contract PatentNFT is ERC721URIStorage{
     IPatentToken public token;
     uint private patentCounter;
     mapping(uint => Patent) public patents;
-    uint filingPrice;
     mapping(uint => Bid[]) bids;
 
     //evento deposito
@@ -111,6 +110,11 @@ contract PatentNFT is ERC721URIStorage{
         while(bids[patentId].length > 0){
             bids[patentId].pop();
         }
+    }
+
+    function getPatent(uint patentId) public view returns(Patent memory){
+        return patents[patentId];
+
     }
 
 

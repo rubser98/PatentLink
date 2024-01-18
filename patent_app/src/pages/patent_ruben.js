@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react'
 import Web3 from 'web3'
 import styles from '../styles/homeSale.module.css'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
+
+const axios = require('axios')
+const FormData = require('form-data')
+const fs = require('fs')
+const JWT = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJiZTVkNzJmYS1mYjQ4LTQzNTEtODg0Zi04MzM4ZWYxN2NjZTUiLCJlbWFpbCI6InJ1YnNlcjE3QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJlY2QzMzRiNWE5NmVkNzAyNmJlYyIsInNjb3BlZEtleVNlY3JldCI6IjI2OTYwYzVkYzBjOGMzM2IwZWRiOTViZjJlZWNjNDk4NGU0ZDNjNTg2NDI3NzAwMDU2ZWJmYTc4MGQxZTU5NTciLCJpYXQiOjE3MDU2MTQ3MDd9.foWHUEjEDthFx-rZyff6Rb7hPiLkfARkHtS4NKblKo4'
+
+
 const vendite = () =>  {
     
     const [error, setError] = useState('')
@@ -14,6 +21,7 @@ const vendite = () =>  {
     const [web3, setWeb3] = useState(null)
     const [patentName, setPatentName] = useState(null)
     const [pdfFile, setPdfFile] = useState(null);
+    const [patentURI, setPatentURI] = useState('')
 
    
 
@@ -29,8 +37,8 @@ const vendite = () =>  {
         const confirmation = window.confirm("Confermi il deposito del brevetto?")
         if (confirmation) {
           try {
-
-            await patentNFTContract.methods.filePatent('provaURI1', patentName).send({
+            pinFileToIPFS()
+            await patentNFTContract.methods.filePatent(patentURI, patentName).send({
                 from : accounts[0],
                 //value : web3.utils.toWei(etherCount, "ether"),
                 gas: 300000,
@@ -48,6 +56,42 @@ const vendite = () =>  {
           console.log("Deposito del brevetto annullato");
         }
       }
+
+
+
+    const pinFileToIPFS = async () => {
+        const formData = new FormData();
+        
+        
+        
+        formData.append('file', pdfFile)
+        
+        const pinataMetadata = JSON.stringify({
+        name: 'File name',
+        });
+        formData.append('pinataMetadata', pinataMetadata);
+        
+        const pinataOptions = JSON.stringify({
+        cidVersion: 0,
+        })
+        formData.append('pinataOptions', pinataOptions);
+
+        try{
+        const res = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+            maxBodyLength: "Infinity",
+            headers: {
+            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+            Authorization: JWT
+            }
+        
+        })
+        console.log('hash:',res.data.IpfsHash,':hash')
+        setPatentURI(res.data.IpfsHash)
+        console.log("File PDF caricato su IPFS con hash:", patentURI);
+        } catch (error) {
+        console.log(error);
+        }
+    }
 
     
     

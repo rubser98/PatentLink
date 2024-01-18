@@ -2,5 +2,9 @@
 node_modules/
 /node_modules
 patent/build/
+<<<<<<< HEAD
 patent_app/.next/
 ./next 
+=======
+patent_app/.next/
+>>>>>>> b8b9be19d66616fabde6771a2ee26871de1748e2

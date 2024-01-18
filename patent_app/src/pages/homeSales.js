@@ -3,10 +3,12 @@ import 'bulma/css/bulma.css'
 import { useState, useEffect } from 'react'
 import Web3 from 'web3'
 import styles from '../styles/homeSale.module.css'
-import vmContract from '../../blockchain/vending'
-import Swal from 'sweetalert2';
-const vendite = () => {
 
+
+import Swal from 'sweetalert2';
+import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
+ 
+const vendite = () =>  {
     const [error, setError] = useState('')
     const [totale, setTotale] = useState(0)
     const [conteggioPint, setConteggio] = useState('')
@@ -31,7 +33,7 @@ const vendite = () => {
         const accounts = await web3.eth.getAccounts()
         console.log(accounts)
         console.log(accounts[0])
-        var count = await vmContract.methods.balanceOf(accounts[0]).call()
+        var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
         count = Number(count)
         count = count / Math.pow(10, 18).toFixed(0)
         console.log(count)
@@ -57,7 +59,7 @@ const vendite = () => {
         console.log(web3)
         //web3 = new Web3(window.ethereum)
         const accounts = await web3.eth.getAccounts()
-        ethereum.enable()
+      
 
         console.log(etherSellCount)
         console.log(sellCount)
@@ -78,7 +80,7 @@ const vendite = () => {
                         console.log(accounts[0])
 
 
-                        await vmContract.methods.sellToken(sellCount).send({ from: accounts[0] })
+                        await patentTokenContract.methods.sellToken(sellCount).send({ from: accounts[0] })
                             .then(function (receipt) {
                                 // Gestione del successo
                                 Swal.fire({
@@ -125,15 +127,16 @@ const vendite = () => {
         const accounts = await web3.eth.getAccounts()
         console.log(buyCount)
         console.log(etherCount)
+
         try {
 
             console.log(accounts[0])
             const transactionObject = {
                 from: accounts[0],
-                to: "0xD883333fE492e5457959796e74140522A25cc839", //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
+                to: patentTokenContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
                 gas: '300000',  // Gas limit
                 value: web3.utils.toWei(etherCount, "ether"),
-                data: vmContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
+                data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
             };
             web3.eth.sendTransaction(transactionObject)
                 .then(function (receipt) {
@@ -161,6 +164,7 @@ const vendite = () => {
                 });
 
 
+
         }
         catch (err) {
             console.log(err)
@@ -176,7 +180,7 @@ const vendite = () => {
     const getTotaleHandler = async () => {
         try {
 
-            const totale2 = await vmContract.methods.totalSupply().call()
+            const totale2 = await patentTokenContract.methods.totalSupply().call()
 
             setTotale((Number(totale2) / Math.pow(10, 18)).toFixed(0))
 

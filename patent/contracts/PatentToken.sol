@@ -43,11 +43,11 @@ contract PatentToken is ERC20{
     ///@notice It allows sender to convert PTNT into ETH
     ///@param amount amount of PTNT to sell  
     function sellToken(uint amount) public{
-        require(amount > 0, 'No amount of PTNT are specified');
-        require(balanceOf(msg.sender) >= amount, 'You do not have that amount of PTNT');
-        emit SellPTNT(msg.sender,amount);
-        payable(msg.sender).transfer(amount);
-        _transfer(msg.sender, owner, amount);
+        require(amount*1000000 > 0, 'No amount of PTNT are specified');
+        require(balanceOf(msg.sender) >= amount*1000000, 'You do not have that amount of PTNT');
+        emit SellPTNT(msg.sender,amount*1000000);
+        payable(msg.sender).transfer(amount*1000000);
+        _transfer(msg.sender, owner, amount*1000000);
 
     }
 

@@ -3154,20 +3154,35 @@
   "sourceMap": "60:1113:17:-:0;;;317:96;;;;;;;;;;350:10;342:5;;:18;;;;;;;;;;;;;;;;;;402:3;371:13;:28;393:4;371:28;;;;;;;;;;;;;;;:34;;;;60:1113;;;;;;",
   "deployedSourceMap": "60:1113:17:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;117:20;;;;;;;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;144:46;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;596:164;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;421:117;;;;;;;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;817:353;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;117:20;;;;;;;;;;;;:::o;144:46::-;;;;;;;;;;;;;;;;;:::o;596:164::-;666:5;;;;;;;;;;652:19;;:10;:19;;;644:59;;;;;;;;;;;;:::i;:::-;;;;;;;;;746:6;714:13;:28;736:4;714:28;;;;;;;;;;;;;;;;:38;;;;;;;:::i;:::-;;;;;;;;596:164;:::o;421:117::-;478:4;502:13;:28;524:4;502:28;;;;;;;;;;;;;;;;495:35;;421:117;:::o;817:353::-;904:7;895:6;:16;;;;:::i;:::-;882:9;:29;;874:79;;;;;;;;;;;;:::i;:::-;;;;;;;;;1004:6;972:13;:28;994:4;972:28;;;;;;;;;;;;;;;;:38;;964:103;;;;;;;;;;;;:::i;:::-;;;;;;;;;1110:6;1078:13;:28;1100:4;1078:28;;;;;;;;;;;;;;;;:38;;;;;;;:::i;:::-;;;;;;;;1156:6;1127:13;:25;1141:10;1127:25;;;;;;;;;;;;;;;;:35;;;;;;;:::i;:::-;;;;;;;;817:353;:::o;7:139:18:-;;91:6;78:20;69:29;;107:33;134:5;107:33;:::i;:::-;59:87;;;;:::o;152:139::-;;236:6;223:20;214:29;;252:33;279:5;252:33;:::i;:::-;204:87;;;;:::o;297:262::-;;405:2;393:9;384:7;380:23;376:32;373:2;;;421:1;418;411:12;373:2;464:1;489:53;534:7;525:6;514:9;510:22;489:53;:::i;:::-;479:63;;435:117;363:196;;;;:::o;565:262::-;;673:2;661:9;652:7;648:23;644:32;641:2;;;689:1;686;679:12;641:2;732:1;757:53;802:7;793:6;782:9;778:22;757:53;:::i;:::-;747:63;;703:117;631:196;;;;:::o;833:118::-;920:24;938:5;920:24;:::i;:::-;915:3;908:37;898:53;;:::o;957:366::-;;1120:67;1184:2;1179:3;1120:67;:::i;:::-;1113:74;;1196:93;1285:3;1196:93;:::i;:::-;1314:2;1309:3;1305:12;1298:19;;1103:220;;;:::o;1329:366::-;;1492:67;1556:2;1551:3;1492:67;:::i;:::-;1485:74;;1568:93;1657:3;1568:93;:::i;:::-;1686:2;1681:3;1677:12;1670:19;;1475:220;;;:::o;1701:366::-;;1864:67;1928:2;1923:3;1864:67;:::i;:::-;1857:74;;1940:93;2029:3;1940:93;:::i;:::-;2058:2;2053:3;2049:12;2042:19;;1847:220;;;:::o;2073:118::-;2160:24;2178:5;2160:24;:::i;:::-;2155:3;2148:37;2138:53;;:::o;2197:222::-;;2328:2;2317:9;2313:18;2305:26;;2341:71;2409:1;2398:9;2394:17;2385:6;2341:71;:::i;:::-;2295:124;;;;:::o;2425:419::-;;2629:2;2618:9;2614:18;2606:26;;2678:9;2672:4;2668:20;2664:1;2653:9;2649:17;2642:47;2706:131;2832:4;2706:131;:::i;:::-;2698:139;;2596:248;;;:::o;2850:419::-;;3054:2;3043:9;3039:18;3031:26;;3103:9;3097:4;3093:20;3089:1;3078:9;3074:17;3067:47;3131:131;3257:4;3131:131;:::i;:::-;3123:139;;3021:248;;;:::o;3275:419::-;;3479:2;3468:9;3464:18;3456:26;;3528:9;3522:4;3518:20;3514:1;3503:9;3499:17;3492:47;3556:131;3682:4;3556:131;:::i;:::-;3548:139;;3446:248;;;:::o;3700:222::-;;3831:2;3820:9;3816:18;3808:26;;3844:71;3912:1;3901:9;3897:17;3888:6;3844:71;:::i;:::-;3798:124;;;;:::o;3928:169::-;;4046:6;4041:3;4034:19;4086:4;4081:3;4077:14;4062:29;;4024:73;;;;:::o;4103:305::-;;4162:20;4180:1;4162:20;:::i;:::-;4157:25;;4196:20;4214:1;4196:20;:::i;:::-;4191:25;;4350:1;4282:66;4278:74;4275:1;4272:81;4269:2;;;4356:18;;:::i;:::-;4269:2;4400:1;4397;4393:9;4386:16;;4147:261;;;;:::o;4414:348::-;;4477:20;4495:1;4477:20;:::i;:::-;4472:25;;4511:20;4529:1;4511:20;:::i;:::-;4506:25;;4699:1;4631:66;4627:74;4624:1;4621:81;4616:1;4609:9;4602:17;4598:105;4595:2;;;4706:18;;:::i;:::-;4595:2;4754:1;4751;4747:9;4736:20;;4462:300;;;;:::o;4768:191::-;;4828:20;4846:1;4828:20;:::i;:::-;4823:25;;4862:20;4880:1;4862:20;:::i;:::-;4857:25;;4901:1;4898;4895:8;4892:2;;;4906:18;;:::i;:::-;4892:2;4951:1;4948;4944:9;4936:17;;4813:146;;;;:::o;4965:96::-;;5031:24;5049:5;5031:24;:::i;:::-;5020:35;;5010:51;;;:::o;5067:126::-;;5144:42;5137:5;5133:54;5122:65;;5112:81;;;:::o;5199:77::-;;5265:5;5254:16;;5244:32;;;:::o;5282:180::-;5330:77;5327:1;5320:88;5427:4;5424:1;5417:15;5451:4;5448:1;5441:15;5468:224;5608:34;5604:1;5596:6;5592:14;5585:58;5677:7;5672:2;5664:6;5660:15;5653:32;5574:118;:::o;5698:177::-;5838:29;5834:1;5826:6;5822:14;5815:53;5804:71;:::o;5881:239::-;6021:34;6017:1;6009:6;6005:14;5998:58;6090:22;6085:2;6077:6;6073:15;6066:47;5987:133;:::o;6126:122::-;6199:24;6217:5;6199:24;:::i;:::-;6192:5;6189:35;6179:2;;6238:1;6235;6228:12;6179:2;6169:79;:::o;6254:122::-;6327:24;6345:5;6327:24;:::i;:::-;6320:5;6317:35;6307:2;;6366:1;6363;6356:12;6307:2;6297:79;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.2;\r\n\r\ncontract VendingMachine {\r\n\r\n    // state variables\r\n    address public owner;\r\n    mapping (address => uint) public donutBalances;\r\n\r\n    // set the owner as th address that deployed the contract\r\n    // set the initial vending machine balance to 100\r\n    constructor() {\r\n        owner = msg.sender;\r\n        donutBalances[address(this)] = 100;\r\n    }\r\n\r\n    function getVendingMachineBalance() public view returns (uint) {\r\n        return donutBalances[address(this)];\r\n    }\r\n\r\n    // Let the owner restock the vending machine\r\n    function restock(uint amount) public {\r\n        require(msg.sender == owner, \"Only the owner can restock.\");\r\n        donutBalances[address(this)] += amount;\r\n    }\r\n\r\n    // Purchase donuts from the vending machine\r\n    function purchase(uint amount) public payable {\r\n        require(msg.value >= amount * 2 ether, \"You must pay at least 2 ETH per donut\");\r\n        require(donutBalances[address(this)] >= amount, \"Not enough donuts in stock to complete this purchase\");\r\n        donutBalances[address(this)] -= amount;\r\n        donutBalances[msg.sender] += amount;\r\n    }\r\n}",
+<<<<<<< HEAD
   "sourcePath": "C:\\Users\\nosen\\Documents\\PatentLink\\patent\\contracts\\vendingMachine.sol",
+=======
+  "sourcePath": "C:\\Users\\Paolo\\OneDrive\\Documenti\\testBlockchain\\PatentLink\\patent\\contracts\\vendingMachine.sol",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
   "ast": {
     "absolutePath": "project:/contracts/vendingMachine.sol",
     "exportedSymbols": {
       "VendingMachine": [
+<<<<<<< HEAD
         3170
       ]
     },
     "id": 3171,
+=======
+        3152
+      ]
+    },
+    "id": 3153,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
+<<<<<<< HEAD
         "id": 3065,
+=======
+        "id": 3047,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
         "literals": [
           "solidity",
           "^",
@@ -3183,9 +3198,15 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
+<<<<<<< HEAD
         "id": 3170,
         "linearizedBaseContracts": [
           3170
+=======
+        "id": 3152,
+        "linearizedBaseContracts": [
+          3152
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
         ],
         "name": "VendingMachine",
         "nameLocation": "69:14:17",
@@ -3194,12 +3215,20 @@
           {
             "constant": false,
             "functionSelector": "8da5cb5b",
+<<<<<<< HEAD
             "id": 3067,
+=======
+            "id": 3049,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "mutability": "mutable",
             "name": "owner",
             "nameLocation": "132:5:17",
             "nodeType": "VariableDeclaration",
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "117:20:17",
             "stateVariable": true,
             "storageLocation": "default",
@@ -3208,7 +3237,11 @@
               "typeString": "address"
             },
             "typeName": {
+<<<<<<< HEAD
               "id": 3066,
+=======
+              "id": 3048,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "117:7:17",
@@ -3223,12 +3256,20 @@
           {
             "constant": false,
             "functionSelector": "9a020d8a",
+<<<<<<< HEAD
             "id": 3071,
+=======
+            "id": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "mutability": "mutable",
             "name": "donutBalances",
             "nameLocation": "177:13:17",
             "nodeType": "VariableDeclaration",
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "144:46:17",
             "stateVariable": true,
             "storageLocation": "default",
@@ -3237,9 +3278,15 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
+<<<<<<< HEAD
               "id": 3070,
               "keyType": {
                 "id": 3068,
+=======
+              "id": 3052,
+              "keyType": {
+                "id": 3050,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "153:7:17",
@@ -3255,7 +3302,11 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
+<<<<<<< HEAD
                 "id": 3069,
+=======
+                "id": 3051,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                 "name": "uint",
                 "nodeType": "ElementaryTypeName",
                 "src": "164:4:17",
@@ -3269,23 +3320,39 @@
           },
           {
             "body": {
+<<<<<<< HEAD
               "id": 3088,
+=======
+              "id": 3070,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "Block",
               "src": "331:82:17",
               "statements": [
                 {
                   "expression": {
+<<<<<<< HEAD
                     "id": 3077,
+=======
+                    "id": 3059,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
+<<<<<<< HEAD
                       "id": 3074,
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3067,
+=======
+                      "id": 3056,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3049,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "src": "342:5:17",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -3296,7 +3363,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
+<<<<<<< HEAD
                         "id": 3075,
+=======
+                        "id": 3057,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -3307,7 +3378,11 @@
                           "typeString": "msg"
                         }
                       },
+<<<<<<< HEAD
                       "id": 3076,
+=======
+                      "id": 3058,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3326,42 +3401,70 @@
                       "typeString": "address"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3078,
+=======
+                  "id": 3060,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "342:18:17"
                 },
                 {
                   "expression": {
+<<<<<<< HEAD
                     "id": 3086,
+=======
+                    "id": 3068,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
+<<<<<<< HEAD
                         "id": 3079,
                         "name": "donutBalances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 3071,
+=======
+                        "id": 3061,
+                        "name": "donutBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "src": "371:13:17",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
+<<<<<<< HEAD
                       "id": 3084,
                       "indexExpression": {
                         "arguments": [
                           {
                             "id": 3082,
+=======
+                      "id": 3066,
+                      "indexExpression": {
+                        "arguments": [
+                          {
+                            "id": 3064,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967268,
                             "src": "393:4:17",
                             "typeDescriptions": {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                               "typeString": "contract VendingMachine"
                             }
                           }
@@ -3369,11 +3472,19 @@
                         "expression": {
                           "argumentTypes": [
                             {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
                               "typeString": "contract VendingMachine"
                             }
                           ],
                           "id": 3081,
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+                              "typeString": "contract VendingMachine"
+                            }
+                          ],
+                          "id": 3063,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3385,14 +3496,22 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
+<<<<<<< HEAD
                             "id": 3080,
+=======
+                            "id": 3062,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "385:7:17",
                             "typeDescriptions": {}
                           }
                         },
+<<<<<<< HEAD
                         "id": 3083,
+=======
+                        "id": 3065,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3422,7 +3541,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "313030",
+<<<<<<< HEAD
                       "id": 3085,
+=======
+                      "id": 3067,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -3442,13 +3565,21 @@
                       "typeString": "uint256"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3087,
+=======
+                  "id": 3069,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "371:34:17"
                 }
               ]
             },
+<<<<<<< HEAD
             "id": 3089,
+=======
+            "id": 3071,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -3456,18 +3587,30 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
+<<<<<<< HEAD
               "id": 3072,
+=======
+              "id": 3054,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "328:2:17"
             },
             "returnParameters": {
+<<<<<<< HEAD
               "id": 3073,
+=======
+              "id": 3055,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "331:0:17"
             },
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "317:96:17",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -3475,36 +3618,60 @@
           },
           {
             "body": {
+<<<<<<< HEAD
               "id": 3101,
+=======
+              "id": 3083,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "Block",
               "src": "484:54:17",
               "statements": [
                 {
                   "expression": {
                     "baseExpression": {
+<<<<<<< HEAD
                       "id": 3094,
                       "name": "donutBalances",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3071,
+=======
+                      "id": 3076,
+                      "name": "donutBalances",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "src": "502:13:17",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                         "typeString": "mapping(address => uint256)"
                       }
                     },
+<<<<<<< HEAD
                     "id": 3099,
                     "indexExpression": {
                       "arguments": [
                         {
                           "id": 3097,
+=======
+                    "id": 3081,
+                    "indexExpression": {
+                      "arguments": [
+                        {
+                          "id": 3079,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 4294967268,
                           "src": "524:4:17",
                           "typeDescriptions": {
+<<<<<<< HEAD
                             "typeIdentifier": "t_contract$_VendingMachine_$3170",
+=======
+                            "typeIdentifier": "t_contract$_VendingMachine_$3152",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "typeString": "contract VendingMachine"
                           }
                         }
@@ -3512,11 +3679,19 @@
                       "expression": {
                         "argumentTypes": [
                           {
+<<<<<<< HEAD
                             "typeIdentifier": "t_contract$_VendingMachine_$3170",
                             "typeString": "contract VendingMachine"
                           }
                         ],
                         "id": 3096,
+=======
+                            "typeIdentifier": "t_contract$_VendingMachine_$3152",
+                            "typeString": "contract VendingMachine"
+                          }
+                        ],
+                        "id": 3078,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3528,14 +3703,22 @@
                           "typeString": "type(address)"
                         },
                         "typeName": {
+<<<<<<< HEAD
                           "id": 3095,
+=======
+                          "id": 3077,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "name": "address",
                           "nodeType": "ElementaryTypeName",
                           "src": "516:7:17",
                           "typeDescriptions": {}
                         }
                       },
+<<<<<<< HEAD
                       "id": 3098,
+=======
+                      "id": 3080,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -3561,15 +3744,24 @@
                       "typeString": "uint256"
                     }
                   },
+<<<<<<< HEAD
                   "functionReturnParameters": 3093,
                   "id": 3100,
+=======
+                  "functionReturnParameters": 3075,
+                  "id": 3082,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "Return",
                   "src": "495:35:17"
                 }
               ]
             },
             "functionSelector": "e7644d34",
+<<<<<<< HEAD
             "id": 3102,
+=======
+            "id": 3084,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3577,23 +3769,39 @@
             "nameLocation": "430:24:17",
             "nodeType": "FunctionDefinition",
             "parameters": {
+<<<<<<< HEAD
               "id": 3090,
+=======
+              "id": 3072,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "454:2:17"
             },
             "returnParameters": {
+<<<<<<< HEAD
               "id": 3093,
+=======
+              "id": 3075,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
+<<<<<<< HEAD
                   "id": 3092,
+=======
+                  "id": 3074,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
+<<<<<<< HEAD
                   "scope": 3102,
+=======
+                  "scope": 3084,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "src": "478:4:17",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3602,7 +3810,11 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
+<<<<<<< HEAD
                     "id": 3091,
+=======
+                    "id": 3073,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "478:4:17",
@@ -3616,7 +3828,11 @@
               ],
               "src": "477:6:17"
             },
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "421:117:17",
             "stateMutability": "view",
             "virtual": false,
@@ -3624,7 +3840,11 @@
           },
           {
             "body": {
+<<<<<<< HEAD
               "id": 3124,
+=======
+              "id": 3106,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "Block",
               "src": "633:127:17",
               "statements": [
@@ -3636,14 +3856,22 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
+<<<<<<< HEAD
                         "id": 3111,
+=======
+                        "id": 3093,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
+<<<<<<< HEAD
                             "id": 3108,
+=======
+                            "id": 3090,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -3654,7 +3882,11 @@
                               "typeString": "msg"
                             }
                           },
+<<<<<<< HEAD
                           "id": 3109,
+=======
+                          "id": 3091,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3670,11 +3902,19 @@
                         "nodeType": "BinaryOperation",
                         "operator": "==",
                         "rightExpression": {
+<<<<<<< HEAD
                           "id": 3110,
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 3067,
+=======
+                          "id": 3092,
+                          "name": "owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3049,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "src": "666:5:17",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -3689,7 +3929,11 @@
                       },
                       {
                         "hexValue": "4f6e6c7920746865206f776e65722063616e20726573746f636b2e",
+<<<<<<< HEAD
                         "id": 3112,
+=======
+                        "id": 3094,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3715,7 +3959,11 @@
                           "typeString": "literal_string \"Only the owner can restock.\""
                         }
                       ],
+<<<<<<< HEAD
                       "id": 3107,
+=======
+                      "id": 3089,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -3729,7 +3977,11 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
+<<<<<<< HEAD
                     "id": 3113,
+=======
+                    "id": 3095,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3744,42 +3996,70 @@
                       "typeString": "tuple()"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3114,
+=======
+                  "id": 3096,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "644:59:17"
                 },
                 {
                   "expression": {
+<<<<<<< HEAD
                     "id": 3122,
+=======
+                    "id": 3104,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
+<<<<<<< HEAD
                         "id": 3115,
                         "name": "donutBalances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 3071,
+=======
+                        "id": 3097,
+                        "name": "donutBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "src": "714:13:17",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
+<<<<<<< HEAD
                       "id": 3120,
                       "indexExpression": {
                         "arguments": [
                           {
                             "id": 3118,
+=======
+                      "id": 3102,
+                      "indexExpression": {
+                        "arguments": [
+                          {
+                            "id": 3100,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967268,
                             "src": "736:4:17",
                             "typeDescriptions": {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                               "typeString": "contract VendingMachine"
                             }
                           }
@@ -3787,11 +4067,19 @@
                         "expression": {
                           "argumentTypes": [
                             {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
                               "typeString": "contract VendingMachine"
                             }
                           ],
                           "id": 3117,
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+                              "typeString": "contract VendingMachine"
+                            }
+                          ],
+                          "id": 3099,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3803,14 +4091,22 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
+<<<<<<< HEAD
                             "id": 3116,
+=======
+                            "id": 3098,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "728:7:17",
                             "typeDescriptions": {}
                           }
                         },
+<<<<<<< HEAD
                         "id": 3119,
+=======
+                        "id": 3101,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3839,11 +4135,19 @@
                     "nodeType": "Assignment",
                     "operator": "+=",
                     "rightHandSide": {
+<<<<<<< HEAD
                       "id": 3121,
                       "name": "amount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3104,
+=======
+                      "id": 3103,
+                      "name": "amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3086,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "src": "746:6:17",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3856,14 +4160,22 @@
                       "typeString": "uint256"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3123,
+=======
+                  "id": 3105,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "714:38:17"
                 }
               ]
             },
             "functionSelector": "c21a702a",
+<<<<<<< HEAD
             "id": 3125,
+=======
+            "id": 3107,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3871,17 +4183,29 @@
             "nameLocation": "605:7:17",
             "nodeType": "FunctionDefinition",
             "parameters": {
+<<<<<<< HEAD
               "id": 3105,
+=======
+              "id": 3087,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
+<<<<<<< HEAD
                   "id": 3104,
+=======
+                  "id": 3086,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "618:6:17",
                   "nodeType": "VariableDeclaration",
+<<<<<<< HEAD
                   "scope": 3125,
+=======
+                  "scope": 3107,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "src": "613:11:17",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3890,7 +4214,11 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
+<<<<<<< HEAD
                     "id": 3103,
+=======
+                    "id": 3085,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "613:4:17",
@@ -3905,12 +4233,20 @@
               "src": "612:13:17"
             },
             "returnParameters": {
+<<<<<<< HEAD
               "id": 3106,
+=======
+              "id": 3088,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "633:0:17"
             },
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "596:164:17",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -3918,7 +4254,11 @@
           },
           {
             "body": {
+<<<<<<< HEAD
               "id": 3168,
+=======
+              "id": 3150,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "Block",
               "src": "863:307:17",
               "statements": [
@@ -3930,14 +4270,22 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
+<<<<<<< HEAD
                         "id": 3136,
+=======
+                        "id": 3118,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "expression": {
+<<<<<<< HEAD
                             "id": 3131,
+=======
+                            "id": 3113,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -3948,7 +4296,11 @@
                               "typeString": "msg"
                             }
                           },
+<<<<<<< HEAD
                           "id": 3132,
+=======
+                          "id": 3114,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3968,17 +4320,29 @@
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
+<<<<<<< HEAD
                           "id": 3135,
+=======
+                          "id": 3117,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
+<<<<<<< HEAD
                             "id": 3133,
                             "name": "amount",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 3127,
+=======
+                            "id": 3115,
+                            "name": "amount",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3109,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "src": "895:6:17",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -3989,7 +4353,11 @@
                           "operator": "*",
                           "rightExpression": {
                             "hexValue": "32",
+<<<<<<< HEAD
                             "id": 3134,
+=======
+                            "id": 3116,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -4018,7 +4386,11 @@
                       },
                       {
                         "hexValue": "596f75206d75737420706179206174206c656173742032204554482070657220646f6e7574",
+<<<<<<< HEAD
                         "id": 3137,
+=======
+                        "id": 3119,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4044,7 +4416,11 @@
                           "typeString": "literal_string \"You must pay at least 2 ETH per donut\""
                         }
                       ],
+<<<<<<< HEAD
                       "id": 3130,
+=======
+                      "id": 3112,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -4058,7 +4434,11 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
+<<<<<<< HEAD
                     "id": 3138,
+=======
+                    "id": 3120,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4073,7 +4453,11 @@
                       "typeString": "tuple()"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3139,
+=======
+                  "id": 3121,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "874:79:17"
                 },
@@ -4085,36 +4469,60 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
+<<<<<<< HEAD
                         "id": 3148,
+=======
+                        "id": 3130,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "baseExpression": {
+<<<<<<< HEAD
                             "id": 3141,
                             "name": "donutBalances",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 3071,
+=======
+                            "id": 3123,
+                            "name": "donutBalances",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "src": "972:13:17",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                               "typeString": "mapping(address => uint256)"
                             }
                           },
+<<<<<<< HEAD
                           "id": 3146,
                           "indexExpression": {
                             "arguments": [
                               {
                                 "id": 3144,
+=======
+                          "id": 3128,
+                          "indexExpression": {
+                            "arguments": [
+                              {
+                                "id": 3126,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                                 "name": "this",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
                                 "referencedDeclaration": 4294967268,
                                 "src": "994:4:17",
                                 "typeDescriptions": {
+<<<<<<< HEAD
                                   "typeIdentifier": "t_contract$_VendingMachine_$3170",
+=======
+                                  "typeIdentifier": "t_contract$_VendingMachine_$3152",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                                   "typeString": "contract VendingMachine"
                                 }
                               }
@@ -4122,11 +4530,19 @@
                             "expression": {
                               "argumentTypes": [
                                 {
+<<<<<<< HEAD
                                   "typeIdentifier": "t_contract$_VendingMachine_$3170",
                                   "typeString": "contract VendingMachine"
                                 }
                               ],
                               "id": 3143,
+=======
+                                  "typeIdentifier": "t_contract$_VendingMachine_$3152",
+                                  "typeString": "contract VendingMachine"
+                                }
+                              ],
+                              "id": 3125,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -4138,14 +4554,22 @@
                                 "typeString": "type(address)"
                               },
                               "typeName": {
+<<<<<<< HEAD
                                 "id": 3142,
+=======
+                                "id": 3124,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                                 "name": "address",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "986:7:17",
                                 "typeDescriptions": {}
                               }
                             },
+<<<<<<< HEAD
                             "id": 3145,
+=======
+                            "id": 3127,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -4174,11 +4598,19 @@
                         "nodeType": "BinaryOperation",
                         "operator": ">=",
                         "rightExpression": {
+<<<<<<< HEAD
                           "id": 3147,
                           "name": "amount",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 3127,
+=======
+                          "id": 3129,
+                          "name": "amount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3109,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "src": "1004:6:17",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -4193,7 +4625,11 @@
                       },
                       {
                         "hexValue": "4e6f7420656e6f75676820646f6e75747320696e2073746f636b20746f20636f6d706c6574652074686973207075726368617365",
+<<<<<<< HEAD
                         "id": 3149,
+=======
+                        "id": 3131,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4219,7 +4655,11 @@
                           "typeString": "literal_string \"Not enough donuts in stock to complete this purchase\""
                         }
                       ],
+<<<<<<< HEAD
                       "id": 3140,
+=======
+                      "id": 3122,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -4233,7 +4673,11 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
+<<<<<<< HEAD
                     "id": 3150,
+=======
+                    "id": 3132,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4248,42 +4692,70 @@
                       "typeString": "tuple()"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3151,
+=======
+                  "id": 3133,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "964:103:17"
                 },
                 {
                   "expression": {
+<<<<<<< HEAD
                     "id": 3159,
+=======
+                    "id": 3141,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
+<<<<<<< HEAD
                         "id": 3152,
                         "name": "donutBalances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 3071,
+=======
+                        "id": 3134,
+                        "name": "donutBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "src": "1078:13:17",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
+<<<<<<< HEAD
                       "id": 3157,
                       "indexExpression": {
                         "arguments": [
                           {
                             "id": 3155,
+=======
+                      "id": 3139,
+                      "indexExpression": {
+                        "arguments": [
+                          {
+                            "id": 3137,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967268,
                             "src": "1100:4:17",
                             "typeDescriptions": {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                               "typeString": "contract VendingMachine"
                             }
                           }
@@ -4291,11 +4763,19 @@
                         "expression": {
                           "argumentTypes": [
                             {
+<<<<<<< HEAD
                               "typeIdentifier": "t_contract$_VendingMachine_$3170",
                               "typeString": "contract VendingMachine"
                             }
                           ],
                           "id": 3154,
+=======
+                              "typeIdentifier": "t_contract$_VendingMachine_$3152",
+                              "typeString": "contract VendingMachine"
+                            }
+                          ],
+                          "id": 3136,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -4307,14 +4787,22 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
+<<<<<<< HEAD
                             "id": 3153,
+=======
+                            "id": 3135,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "1092:7:17",
                             "typeDescriptions": {}
                           }
                         },
+<<<<<<< HEAD
                         "id": 3156,
+=======
+                        "id": 3138,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4343,11 +4831,19 @@
                     "nodeType": "Assignment",
                     "operator": "-=",
                     "rightHandSide": {
+<<<<<<< HEAD
                       "id": 3158,
                       "name": "amount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3127,
+=======
+                      "id": 3140,
+                      "name": "amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3109,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "src": "1110:6:17",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -4360,34 +4856,57 @@
                       "typeString": "uint256"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3160,
+=======
+                  "id": 3142,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "1078:38:17"
                 },
                 {
                   "expression": {
+<<<<<<< HEAD
                     "id": 3166,
+=======
+                    "id": 3148,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
+<<<<<<< HEAD
                         "id": 3161,
                         "name": "donutBalances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 3071,
+=======
+                        "id": 3143,
+                        "name": "donutBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3053,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "src": "1127:13:17",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
+<<<<<<< HEAD
                       "id": 3164,
                       "indexExpression": {
                         "expression": {
                           "id": 3162,
+=======
+                      "id": 3146,
+                      "indexExpression": {
+                        "expression": {
+                          "id": 3144,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -4398,7 +4917,11 @@
                             "typeString": "msg"
                           }
                         },
+<<<<<<< HEAD
                         "id": 3163,
+=======
+                        "id": 3145,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -4425,11 +4948,19 @@
                     "nodeType": "Assignment",
                     "operator": "+=",
                     "rightHandSide": {
+<<<<<<< HEAD
                       "id": 3165,
                       "name": "amount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 3127,
+=======
+                      "id": 3147,
+                      "name": "amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3109,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                       "src": "1156:6:17",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -4442,14 +4973,22 @@
                       "typeString": "uint256"
                     }
                   },
+<<<<<<< HEAD
                   "id": 3167,
+=======
+                  "id": 3149,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "nodeType": "ExpressionStatement",
                   "src": "1127:35:17"
                 }
               ]
             },
             "functionSelector": "efef39a1",
+<<<<<<< HEAD
             "id": 3169,
+=======
+            "id": 3151,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -4457,17 +4996,29 @@
             "nameLocation": "826:8:17",
             "nodeType": "FunctionDefinition",
             "parameters": {
+<<<<<<< HEAD
               "id": 3128,
+=======
+              "id": 3110,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
+<<<<<<< HEAD
                   "id": 3127,
+=======
+                  "id": 3109,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "mutability": "mutable",
                   "name": "amount",
                   "nameLocation": "840:6:17",
                   "nodeType": "VariableDeclaration",
+<<<<<<< HEAD
                   "scope": 3169,
+=======
+                  "scope": 3151,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                   "src": "835:11:17",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4476,7 +5027,11 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
+<<<<<<< HEAD
                     "id": 3126,
+=======
+                    "id": 3108,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "835:4:17",
@@ -4491,19 +5046,31 @@
               "src": "834:13:17"
             },
             "returnParameters": {
+<<<<<<< HEAD
               "id": 3129,
+=======
+              "id": 3111,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "863:0:17"
             },
+<<<<<<< HEAD
             "scope": 3170,
+=======
+            "scope": 3152,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
             "src": "817:353:17",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
+<<<<<<< HEAD
         "scope": 3171,
+=======
+        "scope": 3153,
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
         "src": "60:1113:17"
       }
     ],
@@ -4517,8 +5084,8 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x0062bf3C70a3AF4D8bE330865ba456454c832c18",
-      "transactionHash": "0x1010caafed86f5230d764c4d81cd62b71a0980bd0db78dfc6e243a1fb625f1f7"
+      "address": "0xB7fCD9A1564888F40bc87e37329A5e7aB83e77e3",
+      "transactionHash": "0x9777aa29572921591cd8200b6fe2bdcae9cb9adc92af2ff706bfb2079713ae3f"
     },
     "11155111": {
       "events": {},
@@ -4528,7 +5095,11 @@
     }
   },
   "schemaVersion": "3.4.16",
+<<<<<<< HEAD
   "updatedAt": "2024-01-18T20:47:47.468Z",
+=======
+  "updatedAt": "2024-01-18T16:46:55.311Z",
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
   "devdoc": {
     "kind": "dev",
     "methods": {},

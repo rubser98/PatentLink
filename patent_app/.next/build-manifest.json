@@ -25,7 +25,11 @@
     "/patent_ruben": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
+<<<<<<< HEAD
       "static/chunks/pages/patent_ruben.js"
+=======
+      "static/chunks/pages/homeSales.js"
+>>>>>>> 46a6992b0fe9fdd4acf2a387b6003bb5d2fb6f90
     ]
   },
   "ampFirstPages": []

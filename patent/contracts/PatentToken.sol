@@ -35,7 +35,7 @@ contract PatentToken is ERC20{
     function buyToken(uint amount) public payable{
         require(amount > 0, 'No amount of PTNT are specified');
         require(balanceOf(owner) >= amount, 'Not enough PTNT in the economy');
-        require(msg.value > amount,'Not enough ETH to buy PTNT');
+        require(msg.value >= amount,'Not enough ETH to buy PTNT');
         emit BuyPTNT(msg.sender, amount);
         _transfer(owner,msg.sender,amount);
     }

@@ -21,7 +21,7 @@ const vendite = () =>  {
     const [web3, setWeb3] = useState(null)
     const [patentName, setPatentName] = useState(null)
     const [pdfFile, setPdfFile] = useState(null);
-    const [patentURI, setPatentURI] = useState('')
+
 
    
 
@@ -37,8 +37,8 @@ const vendite = () =>  {
         const confirmation = window.confirm("Confermi il deposito del brevetto?")
         if (confirmation) {
           try {
-            pinFileToIPFS()
-            await patentNFTContract.methods.filePatent(patentURI, patentName).send({
+            const hash = await pinFileToIPFS()
+            await patentNFTContract.methods.filePatent(hash, patentName).send({
                 from : accounts[0],
                 //value : web3.utils.toWei(etherCount, "ether"),
                 gas: 300000,
@@ -86,10 +86,10 @@ const vendite = () =>  {
         
         })
         console.log('hash:',res.data.IpfsHash,':hash')
-        setPatentURI(res.data.IpfsHash)
-        console.log("File PDF caricato su IPFS con hash:", patentURI);
+        return res.data.IpfsHash
         } catch (error) {
         console.log(error);
+        throw error
         }
     }
 

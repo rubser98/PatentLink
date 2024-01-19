@@ -20,10 +20,9 @@ const vendite = () =>  {
     const [etherCount, setEtherCount] = useState('')
     const [web3, setWeb3] = useState(null)
     const [patentName, setPatentName] = useState(null)
-    const [pdfFile, setPdfFile] = useState(null);
-
-
-   
+    const [pdfFile, setPdfFile] = useState(null)
+    const [patentList, setPatentList] = useState([])
+  
 
     useEffect(()=>{
         
@@ -47,6 +46,7 @@ const vendite = () =>  {
             });
     
             console.log("Brevetto depositato con successo!");
+            getMyCountPatentHandler(web3)
             // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
           } catch (err) {
             console.error("Errore durante il deposito del brevetto:", err.message);
@@ -56,6 +56,26 @@ const vendite = () =>  {
           console.log("Deposito del brevetto annullato");
         }
       }
+
+      const getPatentHandler = async () => {
+      
+          try {
+            for(let i=0; i < patentList.length; i++){
+            const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
+            console.log(`PatentID: ${i}: ${patent.name}`)
+            const patentURI = await patentNFTContract.methods.tokenURI(i).call()
+            console.log(`PatentID: ${i}: ${patentURI}`)
+            const patentPDF = await fetchFileFromIPFS(patentURI)
+            console.log(patentPDF)
+          }
+    
+            // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
+          } catch (err) {
+            console.error("Errore durante il deposito del brevetto:", err.message);
+            setError(err + "");
+          }
+        }
+      
 
 
 
@@ -93,18 +113,34 @@ const vendite = () =>  {
         }
     }
 
+    const fetchFileFromIPFS = async (ipfsHash) => {
+      try {
+        const response = await fetch(`https://plum-key-aardwolf-103.mypinata.cloud/ipfs/${ipfsHash}`);
+        
+        if (!response.ok) {
+          throw new Error(`Errore durante il recupero del file da IPFS: ${response.status} - ${response.statusText}`);
+        }
+    
+        // Assume che il file sia un blob e restituisci il blob
+        const blob = await response.blob();
+        return blob;
+      } catch (error) {
+        console.error("Errore durante il fetch del file da IPFS:", error.message);
+        throw error; // Rilancia l'errore per gestirlo nella funzione chiamante
+      }
+    };
+
     
     
-    const getMyCountPintHandler = async (web3) => {
-        console.log(web3)
+    const getMyCountPatentHandler = async (web3) => {
         const accounts = await web3.eth.getAccounts() 
         console.log(accounts)
         console.log(accounts[0])
-        var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
-        count = (Number(count)*Math.pow(10,-18)).toFixed(1)
+        var patents = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
+        setPatentList(patents)
         //count = count*0.000000000000000001
-        console.log(count)
-        setConteggio("Balance: " + count + ' PTNT')
+        console.log(patentList)
+        await getPatentHandler()
     } 
 
     const updatePintQty = event => {
@@ -132,8 +168,7 @@ const vendite = () =>  {
 
     }
     const connectWalletHandler = async() => {
-       
-        
+
         try{
         
            if (typeof window !== "undefined" && typeof window.ethereum !== "undefined")
@@ -143,7 +178,7 @@ const vendite = () =>  {
                 var _web3 = new Web3(window.ethereum)
                 setWeb3(_web3)
                 console.log(web3)
-                getMyCountPintHandler(_web3)
+                getMyCountPatentHandler(_web3)
  
               }
                    
@@ -183,7 +218,16 @@ const vendite = () =>  {
           <h2>Filing fee: {totale} PTNT </h2>
         </div>
       </section>
-
+      <section>
+        <div className='container'>
+          <h2>Token List</h2>
+          <ul>
+            {patentList.map((patent, index) => (
+              <li key={index}>{patent}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
       <section>
         <div className='container'>
           <p> {conteggioPint}</p>

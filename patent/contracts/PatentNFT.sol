@@ -117,5 +117,22 @@ contract PatentNFT is ERC721URIStorage{
 
     }
 
+    function getPatentsByOwner(address owner) external view returns (uint[] memory) {
+        uint tokenCount = balanceOf(owner);
+        uint[] memory tokens = new uint[](tokenCount);
+        uint count = 0;
+        for(uint i = 0; i < patentCounter && count < tokenCount; i++) {
+            if (ownerOf(i) == owner) {
+                tokens[count] = i;
+                count++;
+            }
+            
+        }
+
+        return tokens;
+    }
+    
+
+
 
 }

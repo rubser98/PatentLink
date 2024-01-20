@@ -70,39 +70,42 @@ const patentGallery = () =>  {
       }
   }
    
-    const getPatentHandler = async (web3) => {
-      const accounts = await web3.eth.getAccounts() 
-      console.log(accounts)
-      console.log(accounts[0])
-      var patentList = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
-      
-        try {
+  const getPatentHandler = async (web3) => {
+    const accounts = await web3.eth.getAccounts() 
+    console.log(accounts)
+    console.log(accounts[0])
+    var patentList = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
+    var patentCount = await patentNFTContract.methods.getTokenCount().call()
 
-          for(let i=0; i < patentList.length; i++){
-         
+    
+      try {
+
+        for(let i=0; i < patentCount; i++){
        
+        if (!patentList.includes(i)){
           const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
           const patentURI = await patentNFTContract.methods.tokenURI(i).call()
-          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI}
+          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: i}
           cardList.push(brevetto)
-          
+        }
         
+      
 
-          console.log(patent)
-          console.log(`PatentID: ${i}: ${patent.name}`)
-          
-          console.log(`PatentID: ${i}: ${patentURI}`)
-         
-        }
-        setCard(cardList)
-  
-          // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
-        } catch (err) {
-          console.error("Errore durante il deposito del brevetto:", err.message);
-          setError(err + "");
-        }
+        console.log(patent)
+        console.log(`PatentID: ${brevetto.id}: ${brevetto.title}`)
+        
+        
+       
       }
+      console.log(cardList)
+      setCard(cardList)
 
+        // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
+      } catch (err) {
+        console.error("Errore durante il deposito del brevetto:", err.message);
+        setError(err + "");
+      }
+    }
     return (
         <div className={styles.main}>
             <Head>

@@ -6,10 +6,11 @@ import { useState, useEffect,useRef } from 'react'
 import Web3 from 'web3'
 import styles from '../styles/homeSale.module.css'
 import Swal from 'sweetalert2';
-import CardTable from './CardTable';
+import PatentGalleryFormat from './patentGalleryFormat';
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import  axios from'axios'
 import  FormData from 'form-data'
+import CardTable from './CardTable';
 
 
 const patentGallery = () =>  {
@@ -75,36 +76,37 @@ const patentGallery = () =>  {
     console.log(accounts)
     console.log(accounts[0])
     var patentList = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
+    console.log(patentList)
     var patentCount = await patentNFTContract.methods.getTokenCount().call()
 
     
       try {
 
         for(let i=0; i < patentCount; i++){
-       
-        if (!patentList.includes(i)){
-          const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
+        console.log(patentList, BigInt(i) , !patentList.includes(BigInt(i)))
+        if (!patentList.includes(BigInt(i))){
+          const patent = await patentNFTContract.methods.getPatent(i).call()
           const patentURI = await patentNFTContract.methods.tokenURI(i).call()
           var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: i}
           cardList.push(brevetto)
         }
-        
       
-
-        console.log(patent)
-        console.log(`PatentID: ${brevetto.id}: ${brevetto.title}`)
         
-        
-       
       }
       console.log(cardList)
       setCard(cardList)
+      console.log(cardData)
+    
 
         // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
       } catch (err) {
+        console.log(cardList)
+        setCard(cardList)
+        console.log(cardData)
         console.error("Errore durante il deposito del brevetto:", err.message);
         setError(err + "");
       }
+     
     }
     return (
         <div className={styles.main}>
@@ -145,7 +147,7 @@ const patentGallery = () =>  {
             </section>
             <div className={styles.div} >
               <h1>Tabella di Card</h1>
-             <CardTable data={cardData} />
+             <PatentGalleryFormat data={cardData} />
            </div>
         </div>
         

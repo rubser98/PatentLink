@@ -17,19 +17,19 @@ const PatentGalleryFormat = ({ data }) => {
 
       var web3 = new Web3(window.ethereum)
       const accounts = await web3.eth.getAccounts()
-      var address = await patentNFTContract.methods.ownerOf(6).call() 
+      var address = await patentNFTContract.methods.ownerOf(id).call() 
       console.log(address)
-      console.log(accounts[0], id)
-      var test = await patentNFTContract.methods.getBids(6).call({from : accounts[0], gas:300000})
-      console.log(test)
+      console.log('make bid: ', accounts[0], id)
+      //var test = await patentNFTContract.methods.getBids(id).call({from : accounts[0], gas:300000})
+      //console.log(test)
       
      /*
       const transactionObject = {
         from: accounts[0],
         to: patentNFTContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
         gas: '300000',  // Gas limit
-        data: patentNFTContract.methods.makeBid(4,1).encodeABI(), // Includi il metodo e i suoi parametri
-    };
+        data: patentNFTContract.methods.makeBid(,1).encodeABI(), // Includi il metodo e i suoi parametri
+    }; */
       Swal.fire({
         title: 'Inserisci una cifra:',
         input: 'number',
@@ -40,11 +40,12 @@ const PatentGalleryFormat = ({ data }) => {
         if (result.isConfirmed) {
           const cifraInserita = result.value;
           if (cifraInserita !== undefined) {
-            console.log(`Hai inserito la cifra: ${cifraInserita}`);
+            const cifra = Number(cifraInserita)*Math.pow(10,18)
+            console.log(`Hai inserito la cifra: ${cifra}`);
             // Puoi fare qualcos'altro con la cifra inserita
             var address = await patentNFTContract.methods.ownerOf(id).call()
             console.log(address)
-            await patentNFTContract.methods.makeBid(6,1).send({from : accounts[0], gas:300000}).catch(function (error) {
+            await patentNFTContract.methods.makeBid(id,cifra).send({from : accounts[0], gas:300000}).catch(function (error) {
               // Gestione dell'errore
               console.log(error)
               Swal.fire({
@@ -63,7 +64,7 @@ const PatentGalleryFormat = ({ data }) => {
         
       });
       
-     */
+     
       
 
 

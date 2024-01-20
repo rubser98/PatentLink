@@ -75,15 +75,16 @@ const vendite = () =>  {
       console.log(accounts)
       console.log(accounts[0])
       var patentList = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
-      
+      console.log(patentList)
         try {
 
           for(let i=0; i < patentList.length; i++){
          
        
           const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
-          const patentURI = await patentNFTContract.methods.tokenURI(i).call()
-          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI}
+          console.log(patent)
+          const patentURI = await patentNFTContract.methods.tokenURI(patentList[i]).call()
+          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: patentList[i], sender: accounts[0]}
           cardList.push(brevetto)
           
         

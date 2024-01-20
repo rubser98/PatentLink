@@ -2,11 +2,25 @@
 import React from 'react';
 import { Card, CardContent, Grid, Typography, Button } from '@mui/material';
 import { useState, useEffect } from 'react'
+import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 
 const CardTable = ({ data }) => {
   const buttonHandlerCard = (link) => {
     console.log(link)
     window.open(link)
+  }
+
+  const buttonHandlerBids = async (sender, id) =>{
+    console.log('id ',id, 'sender ', sender)
+    try {
+      var owner = await patentNFTContract.methods.ownerOf(id).call()
+      console.log('owner:',owner)
+      var bid = await patentNFTContract.methods.getBids(BigInt(id), {from: sender}).call()
+      console.log('bids:', bid[0])
+  } catch (error) {
+      console.error('Error fetching bids:', error.message)
+  }
+
   }
    
   
@@ -33,6 +47,9 @@ const CardTable = ({ data }) => {
           </CardContent>
           <Button variant="contained" color="primary"onClick={() => buttonHandlerCard(item.link)}>
             Vai al link
+          </Button>
+          <Button variant="contained" color="primary"onClick={() => buttonHandlerBids(item.sender, item.id)}>
+            Vedi offerte
           </Button>
         </Card>
       </Grid>

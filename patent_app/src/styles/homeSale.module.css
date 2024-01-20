@@ -3,3 +3,11 @@
     font-size: 2em;
     font-weight: bold;
 }
+.div {
+    margin: 10px; /* Margine esterno */
+    padding: 15px; /* Padding interno */
+    border: 1px solid #ddd; /* Bordo con colore grigio chiaro */
+    border-radius: 5px; /* Bordi arrotondati */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    background-color: #fff; /* Colore di sfondo bianco */
+  }

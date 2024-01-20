@@ -2,22 +2,25 @@ import Head from 'next/head'
 import 'bulma/css/bulma.css'
 import { useState, useEffect } from 'react'
 import Web3 from 'web3'
+import { BrowserRouter as Router, Route, Link ,  useNavigate} from 'react-router-dom';
+
+
 import styles from '../styles/homeSale.module.css'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 
 const axios = require('axios')
 const FormData = require('form-data')
-const fs = require('fs')
+
 const JWT = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJiZTVkNzJmYS1mYjQ4LTQzNTEtODg0Zi04MzM4ZWYxN2NjZTUiLCJlbWFpbCI6InJ1YnNlcjE3QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJlY2QzMzRiNWE5NmVkNzAyNmJlYyIsInNjb3BlZEtleVNlY3JldCI6IjI2OTYwYzVkYzBjOGMzM2IwZWRiOTViZjJlZWNjNDk4NGU0ZDNjNTg2NDI3NzAwMDU2ZWJmYTc4MGQxZTU5NTciLCJpYXQiOjE3MDU2MTQ3MDd9.foWHUEjEDthFx-rZyff6Rb7hPiLkfARkHtS4NKblKo4'
 
 
 const vendite = () =>  {
+ 
     
     const [error, setError] = useState('')
     const [totale,setTotale] = useState(0)
     const [conteggioPint,setConteggio] = useState('')
-    const [buyCount, setBuyCount] = useState(0)
-    const [etherCount, setEtherCount] = useState('')
+
     const [web3, setWeb3] = useState(null)
     const [patentName, setPatentName] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
@@ -62,6 +65,7 @@ const vendite = () =>  {
           try {
             for(let i=0; i < patentList.length; i++){
             const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
+            console.log(patent)
             console.log(`PatentID: ${i}: ${patent.name}`)
             const patentURI = await patentNFTContract.methods.tokenURI(i).call()
             console.log(`PatentID: ${i}: ${patentURI}`)
@@ -130,7 +134,17 @@ const vendite = () =>  {
       }
     };
 
-    
+    const getMyCountPintHandler = async (web3) => {
+      console.log(web3)
+      const accounts = await web3.eth.getAccounts()
+      console.log(accounts)
+      console.log(accounts[0])
+      var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
+      count = Number(count)
+      count = count / Math.pow(10, 18).toFixed(0)
+      console.log(count)
+      setConteggio("this is your amount of pint : " + count)
+  }
     
     const getMyCountPatentHandler = async (web3) => {
         const accounts = await web3.eth.getAccounts() 
@@ -141,6 +155,7 @@ const vendite = () =>  {
         //count = count*0.000000000000000001
         console.log(patentList)
         await getPatentHandler()
+        await getMyCountPintHandler(web3)
     } 
 
     const updatePintQty = event => {
@@ -207,11 +222,23 @@ const vendite = () =>  {
           <div className='navbar-brand'>
             <h1>PatentLink</h1>
           </div>
+          <div className='navbar-item ml-50'>
+            <form action="/myWallet">
+             <button className='button is-primary'> myNftWallet</button>
+            </form>
+            
+           
+          </div>
           <div className='navbar-end'>
             <button onClick={connectWalletHandler} className='button is-primary'>Connect Wallet</button>
           </div>
         </div>
       </nav>
+      <section>
+                <div className='container'>
+                    <p> {conteggioPint}</p>
+                </div>
+      </section>
 
       <section>
         <div className='container'>
@@ -228,11 +255,7 @@ const vendite = () =>  {
           </ul>
         </div>
       </section>
-      <section>
-        <div className='container'>
-          <p> {conteggioPint}</p>
-        </div>
-      </section>
+      
 
       <section className='mt-5'>
         <div className='container'>

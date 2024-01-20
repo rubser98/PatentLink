@@ -35,24 +35,24 @@ const vendite = () =>  {
         console.log(accounts[0])
         var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
         count = Number(count)
-        count = count / Math.pow(10, 18).toFixed(0)
+        count = (count * Math.pow(10, -18)).toFixed(0)
         console.log(count)
         setConteggio("this is your amount of pint : " + count)
     }
 
     const updatePintQty = event => {
         //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
-        setBuyCount((event.target.value * Math.pow(10, 12)).toFixed(0))
+        setBuyCount((event.target.value * Math.pow(10, 18)).toFixed(0))
         setEtherCount(event.target.value)
-        console.log((event.target.value * Math.pow(10, 12)).toFixed(0))
+        console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
 
 
     }
     const updatePintQtySell = event => {
         //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
-        setsellCount((event.target.value * Math.pow(10, 12)).toFixed(0))
+        setsellCount((event.target.value * Math.pow(10, 18)).toFixed(0))
         setSellEtherCount(event.target.value)
-        console.log((event.target.value * Math.pow(10, 12)).toFixed(0))
+        console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
 
     }
     const sellPintHandler = async () => {

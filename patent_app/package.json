@@ -10,11 +10,18 @@
     "compile": "solcjs --abi --include-path node_modules/ --base-path . blockchain/contracts/vendingMachine.sol --output-dir blockchain/build"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.5",
     "@openzeppelin/contracts": "^4.3.2",
+    "axios": "^1.6.5",
     "bulma": "^0.9.4",
+    "form-data": "^4.0.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-router-dom": "^6.21.3",
+    "styled-components": "^6.1.8",
     "sweetalert2": "^11.10.3",
     "web3": "^4.3.0"
   },

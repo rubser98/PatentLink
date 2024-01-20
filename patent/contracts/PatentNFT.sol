@@ -53,7 +53,9 @@ contract PatentNFT is ERC721URIStorage{
     ///@notice method that allow user to file their patents
     ///@param _uri URI of the filed Patent in IPFS
     function filePatent(string memory _uri, string memory _name) public{
+        require(bytes(_uri).length > 0,'URI is not defined');
         require(token.payFilingFee(msg.sender),'Filing fee payment failed');
+
         patents[patentCounter] = Patent({ 
             name: _name, 
             timestamp: block.timestamp,
@@ -71,7 +73,7 @@ contract PatentNFT is ERC721URIStorage{
     }
 
     function getBids(uint tokenId) public view returns(Bid[] memory){
-        require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
+        //require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
         return bids[tokenId];
     }
 
@@ -95,8 +97,10 @@ contract PatentNFT is ERC721URIStorage{
     }
 
     function makeBid(uint patentId, uint amount) public{
+        require(ownerOf(patentId) != address(0), 'The patent does not exist');
         require(msg.sender != ownerOf(patentId),'You are already the owner of the patent');
         require(token.balanceOf(msg.sender) >= amount, 'You do not have enough PTNT');
+        
         Bid memory bid = Bid({
             bidder: msg.sender,
             amount: amount,

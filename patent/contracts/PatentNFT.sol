@@ -79,15 +79,16 @@ contract PatentNFT is ERC721URIStorage{
 
     function rejectBid(uint tokenId, uint indexBid) public{
         require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
-        require(bids[tokenId].length < indexBid, 'Index out of range');
+        require(bids[tokenId].length > indexBid, 'Index out of range');
         bids[tokenId][indexBid].state = State.Refused;
         emit BidRefused(tokenId, ownerOf(tokenId), bids[tokenId][indexBid].bidder);
     }
 
     function acceptBid(uint tokenId, uint indexBid) public{
         require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
-        require(bids[tokenId].length < indexBid, 'Index out of range');
+        require(bids[tokenId].length > indexBid, 'Index out of range');
         Bid memory bid = bids[tokenId][indexBid];
+        require(bid.state == State.Pending);
         require(ownerOf(tokenId) != bid.bidder, 'You can not accept your bids');
         require(token.balanceOf(bid.bidder) >= bid.amount, 'The bidder does not have enough PTNT');
         emit PatentAssignment(tokenId, msg.sender, bid.bidder);

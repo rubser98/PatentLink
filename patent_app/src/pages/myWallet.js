@@ -17,12 +17,14 @@ const vendite = () =>  {
     var cardList = []
     const [cardData, setCard]  = useState([]);
         
-    
+   
     const pathBasePinata = "https://gateway.pinata.cloud/ipfs/"
     const [error, setError] = useState('')
     const [conteggioPint, setConteggio] = useState('')
     const [web3, setWeb3] = useState(null);
-    //const [patentList, setPatentList] = useState([])
+    const [isVisiblePatents, setIsVisible] = useState(true);
+    const [isVisibleBids, setIsVisibleBids] = useState(true);
+   
    
     useEffect(() => {
       if (!loaded.current) {
@@ -48,10 +50,10 @@ const vendite = () =>  {
       try {
 
           if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-             // await window.ethereum.request({ method: "eth_requestAccounts" })
+            
               var _web3 = new Web3(window.ethereum)
               setWeb3(_web3)
-              //getPatentHandler(_web3)
+             
               
 
           }
@@ -69,7 +71,7 @@ const vendite = () =>  {
           setError("l'utente ha rifiutato la connessione")
       }
   }
-   
+
     const getPatentHandler = async (web3) => {
       const accounts = await web3.eth.getAccounts() 
       console.log(accounts)
@@ -111,6 +113,7 @@ const vendite = () =>  {
                 <meta name="description" content="home" />
             </Head>
 
+
             <nav className="navbar mt-4 mb-4">
                 <div className='container'>
                     <div className='navbar-brand ml-15'>
@@ -135,15 +138,17 @@ const vendite = () =>  {
                 
 
             </nav>
+            
           
             <section>
                 <div >
                     <p> {conteggioPint}</p>
                 </div>
             </section>
-            <div className={styles.div} >
+           
+           <div  className={styles.div} >
               <h1>Tabella di Card</h1>
-             <CardTable data={cardData} />
+             <CardTable  data={cardData} />
            </div>
         </div>
         

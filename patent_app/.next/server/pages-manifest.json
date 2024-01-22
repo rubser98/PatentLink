@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/patentGalleryHome": "pages/patentGalleryHome.js",
-  "/homeSales": "pages/homeSales.js",
   "/myWallet": "pages/myWallet.js",
-  "/patent_ruben": "pages/patent_ruben.js"
+  "/": "pages/index.js",
+  "/patentGalleryHome": "pages/patentGalleryHome.js"
 }

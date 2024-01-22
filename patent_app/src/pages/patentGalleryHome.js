@@ -13,24 +13,24 @@ import  FormData from 'form-data'
 import CardTable from './CardTable';
 
 
+
 const patentGallery = () =>  {
     const loaded  = useRef(false);
     var cardList = []
     const [cardData, setCard]  = useState([]);
-        
- 
     const pathBasePinata = "https://gateway.pinata.cloud/ipfs/"
     const [error, setError] = useState('')
     const [conteggioPint, setConteggio] = useState('')
     const [web3, setWeb3] = useState(null);
-    //const [patentList, setPatentList] = useState([])
+    const [isConnectedToMetamask , setConnection] = useState(false)
+  
    
     useEffect(() => {
       if (!loaded.current) {
         loaded.current = true
        
-        
-          loadHandler()
+          metamaskConnetcionHandler()
+          
       }
 
 
@@ -39,21 +39,67 @@ const patentGallery = () =>  {
     {
       var _web3 = new Web3(window.ethereum)
       setWeb3(_web3)
+      cardList = []
+      setCard([])
       getPatentHandler(_web3)
 
     }
+    
+    const metamaskConnetcionHandler = async() => {
+      var _web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts() 
+      setWeb3(_web3)
+      
+      if (accounts.length === 0) {
+        console.log('Metamask disconnesso');
+        setConnection(false)
+        cardList = []
+        setCard([])
 
+      }
+      else
+      { console.log("reload")
+        setConnection(true)
+        cardList = []
+        setCard([])
+        loadHandler()
+      
+
+      }
+      window.ethereum.on('accountsChanged', async (accounts) => {
+            
+        var _web3 = new Web3(window.ethereum)
+        setWeb3(_web3)
+      
+      
+        if (accounts.length === 0) {
+         console.log('Metamask disconnesso');
+         setConnection(false)
+         cardList = []
+         setCard([])
+
+         }
+        else
+        {
+          setConnection(true)
+          cardList = []
+          setCard([])
+          loadHandler()
+        }
+    })
+
+    }
   
     const connectWalletHandler = async () => {
 
       try {
 
           if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-             // await window.ethereum.request({ method: "eth_requestAccounts" })
-              var _web3 = new Web3(window.ethereum)
-              setWeb3(_web3)
-              //getPatentHandler(_web3)
-              
+            console.log("connessione")
+            await window.ethereum.request({ method: "eth_requestAccounts" })
+            var _web3 = new Web3(window.ethereum)
+            setConnection(true)
+            setWeb3(web3)
 
           }
           else {
@@ -121,13 +167,33 @@ const patentGallery = () =>  {
                         <h1>saleHome</h1>
                     </div>
                     <div  className='navbar-item'>
-                      <form action="/patent_ruben">
-                       <button className='button is-primary'> buyNft</button>
+                      <form action="/homeSales">
+                       <button className='button is-primary'> buyPNT</button>
+                      </form>
+
+                    </div>
+                    <div  className='navbar-item'>
+                      <form action="/">
+                       <button className='button is-primary'> home</button>
+                      </form>
+
+                    </div>
+                    
+                    <div  className='navbar-item'>
+                      <form action="/patentDeploy">
+                       <button className='button is-primary'> patentDeployHome</button>
+                      </form>
+
+                    </div>
+                    <div  className='navbar-item'>
+                      <form action="/myWallet">
+                       <button className='button is-primary'> myWallet</button>
                       </form>
 
                     </div>
                     <div className='navbar-end'>
                         <button
+                            disabled={isConnectedToMetamask}
                             onClick={connectWalletHandler}
                             className='button is-primary'>connect wallet
                             

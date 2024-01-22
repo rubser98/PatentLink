@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import Web3 from 'web3'
-import { BrowserRouter as Router, Route, Link ,  useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 
 import styles from '../styles/homeSale.module.css'
@@ -14,32 +15,106 @@ const FormData = require('form-data')
 const JWT = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJiZTVkNzJmYS1mYjQ4LTQzNTEtODg0Zi04MzM4ZWYxN2NjZTUiLCJlbWFpbCI6InJ1YnNlcjE3QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJlY2QzMzRiNWE5NmVkNzAyNmJlYyIsInNjb3BlZEtleVNlY3JldCI6IjI2OTYwYzVkYzBjOGMzM2IwZWRiOTViZjJlZWNjNDk4NGU0ZDNjNTg2NDI3NzAwMDU2ZWJmYTc4MGQxZTU5NTciLCJpYXQiOjE3MDU2MTQ3MDd9.foWHUEjEDthFx-rZyff6Rb7hPiLkfARkHtS4NKblKo4'
 
 
-const vendite = () =>  {
+const patentDeploy = () =>  {
  
     
     const [error, setError] = useState('')
     const [totale,setTotale] = useState(0)
     const [conteggioPint,setConteggio] = useState('')
-
     const [web3, setWeb3] = useState(null)
     const [patentName, setPatentName] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
     const [patentList, setPatentList] = useState([])
+    const [isConnectedToMetamask , setConnection] = useState(false)
+    const loaded  = useRef(false);
   
 
-    useEffect(()=>{
+   
+    useEffect(() => {
+
+      if (!loaded.current) {
+          loaded.current = true
+         
         
-         getTotaleHandler()
+          getTotaleHandler()
+          metamaskConnetcionHandler()
+        }
+  
+  },[])
+  const metamaskConnetcionHandler = async() => {
+
+    var _web3 = new Web3(window.ethereum)
+    const accounts = await _web3.eth.getAccounts() 
+
+    if (accounts.length === 0) {
+        console.log('Metamask disconnesso');
+        setConnection(false)
+        setConteggio("")
+
+        
+      } else {
+        setConnection(true)
+        getMyCountPintHandler(_web3)
       
+      }
+
+    window.ethereum.on('accountsChanged', (accounts) => {
         
+        if (accounts.length === 0) {
+          console.log('Metamask disconnesso');
+          setConnection(false)
+          setConteggio("")
+
+          
+        } else {
+          setConnection(true)
+          getMyCountPintHandler(_web3)
+        
+        }
     })
 
+}
+
+
     const filePatentHandler = async () => {
-        const accounts = await web3.eth.getAccounts();
-        const confirmation = window.confirm("Confermi il deposito del brevetto?")
-        if (confirmation) {
+        var _web3 = new Web3(window.ethereum)
+        const accounts = await _web3.eth.getAccounts();
+        
+        
           try {
             const hash = await pinFileToIPFS()
+            const transactionObject = {
+              from: accounts[0],
+              to: patentNFTContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
+              gas: '300000',  // Gas limit
+              data: patentNFTContract.methods.filePatent(hash, patentName).encodeABI(), // Includi il metodo e i suoi parametri
+          };
+          _web3.eth.sendTransaction(transactionObject)
+                .then(function (receipt) {
+                    console.log(receipt)
+                    // Gestione del successo
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Operazione completata!',
+                        text: 'Transazione confermata. hash della transazione: ' + receipt.transactionHash,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    })
+                    getMyCountPintHandler(_web3)
+
+                })
+                .catch(function (error) {
+                    // Gestione dell'errore
+                    console.log(error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Operazione andata in errore!',
+                        text: 'Errore durante l\'invio della transazione: ' + error,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    })
+                });
+            /*
             await patentNFTContract.methods.filePatent(hash, patentName).send({
                 from : accounts[0],
                 //value : web3.utils.toWei(etherCount, "ether"),
@@ -47,17 +122,16 @@ const vendite = () =>  {
                // gasPrice: "30000000",
     
             });
+            */
     
             console.log("Brevetto depositato con successo!");
-            getMyCountPatentHandler(web3)
+            getMyCountPatentHandler(_web3)
             // Aggiorna lo stato o esegui altre azioni necessarie dopo il deposito del brevetto
           } catch (err) {
             console.error("Errore durante il deposito del brevetto:", err.message);
             setError(err + "");
           }
-        } else {
-          console.log("Deposito del brevetto annullato");
-        }
+       
       }
 
       const getPatentHandler = async () => {
@@ -152,20 +226,11 @@ const vendite = () =>  {
         console.log(accounts[0])
         var patents = await patentNFTContract.methods.getPatentsByOwner(accounts[0]).call()
         setPatentList(patents)
-        //count = count*0.000000000000000001
         console.log(patentList)
         await getPatentHandler()
         await getMyCountPintHandler(web3)
     } 
 
-    const updatePintQty = event => {
-        //function needed to save the amount of tokens written on the input form by the user (this value will be useful in the buyPintHandler)
-        setBuyCount((event.target.value * Math.pow(10, 18)).toFixed(0))
-        setEtherCount(event.target.value)
-        console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
-        
-        
-    }
     
     const getTotaleHandler = async() => {
         try
@@ -222,15 +287,32 @@ const vendite = () =>  {
           <div className='navbar-brand'>
             <h1>PatentLink</h1>
           </div>
-          <div className='navbar-item ml-50'>
-            <form action="/myWallet">
-             <button className='button is-primary'> myNftWallet</button>
-            </form>
-            
-           
+          <div  className='navbar-item'>
+                      <form action="/homeSales">
+                       <button className='button is-primary'> buyPNT</button>
+                      </form>
+
+          </div>
+          <div  className='navbar-item'>
+                      <form action="/">
+                       <button className='button is-primary'> home</button>
+                      </form>
+          </div>
+          <div  className='navbar-item'>
+                      <form action="/myWallet">
+                       <button className='button is-primary'> myWallet</button>
+                      </form>
+           </div>
+          <div  className='navbar-item'>
+                      <form action="/patentGalleryHome">
+                       <button className='button is-primary'> patentGallery</button>
+                      </form>
           </div>
           <div className='navbar-end'>
-            <button onClick={connectWalletHandler} className='button is-primary'>Connect Wallet</button>
+            <button onClick={connectWalletHandler} 
+                    className='button is-primary'
+                    disabled={isConnectedToMetamask }>
+                    Connect Wallet</button>
           </div>
         </div>
       </nav>
@@ -276,7 +358,7 @@ const vendite = () =>  {
               <button
                 onClick={filePatentHandler}
                 className='button is-primary mt-3'
-                disabled={!patentName || !pdfFile}
+                disabled={(!patentName || !pdfFile) || !isConnectedToMetamask }
               >
                 Submit
               </button>
@@ -296,4 +378,4 @@ const vendite = () =>  {
     
 }
 
-export default vendite
+export default patentDeploy

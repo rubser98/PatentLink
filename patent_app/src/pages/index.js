@@ -194,10 +194,11 @@ const Home = () =>  {
     const connectWalletHandler = async () => {
 
         try {
-
             if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-                await window.ethereum.request({ method: "eth_requestAccounts" })
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
                 var _web3 = new Web3(window.ethereum)
+                document.getElementById("connectbutton").disabled=true
+                document.getElementById("connectbutton").textContent=accounts[0]
                 setWeb3(_web3)
                 getMyCountPintHandler(_web3)
                 setIsBottoneBuyAbilitato(true)
@@ -211,6 +212,7 @@ const Home = () =>  {
                     text: 'it is required to install metamask ' + error.data.message,
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
+            
                 })
             }
         }
@@ -248,7 +250,7 @@ const Home = () =>  {
                 <a class="nav-link" href="#explore">Explore</a>
               </li>
               <li>
-              <button type="button" class="btn btn-secondary"
+              <button id = "connectbutton" type="button" class="btn btn-secondary"
                 onClick={connectWalletHandler}
                >connect wallet
                 </button>

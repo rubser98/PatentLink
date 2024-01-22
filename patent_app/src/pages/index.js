@@ -42,7 +42,7 @@ const Home = () =>  {
     }
 
     const updatePintQty = event => {
-        //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
+        //function needed to  the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
         setBuyCount((event.target.value * Math.pow(10, 12)).toFixed(0))
         setEtherCount(event.target.value)
         console.log((event.target.value * Math.pow(10, 12)).toFixed(0))
@@ -306,7 +306,7 @@ const Home = () =>  {
                         <div class="modal-content bg-dark">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button is-secondary" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
@@ -317,10 +317,10 @@ const Home = () =>  {
                                 <div className='field'>
                                 <label className='label'> BUY PNT</label>
                                 <div className='control'>
-                                <input onChange={updatePintQty} className='input' type='type' placeholder='Enter amount...' />
-                                <button
+                                <input onChange={updatePintQty} className='input form-control mb-2' type='type' placeholder='Enter amount...' />
+                                <button 
                                     onClick={buyPintHandler}
-                                    className='button is-primary mt-3'
+                                    className='btn btn-secondary'
                                     disabled={!isBottoneSellAbilitato} >
                                     buy</button>
                                     </div>
@@ -333,11 +333,11 @@ const Home = () =>  {
                             <div className='field'>
                             <label className='label'> SELL PNT</label>
                             <div className='control'>
-                            <input onChange={updatePintQtySell} className='input' type='type' placeholder='Enter amount...' />
+                            <input onChange={updatePintQtySell} className='input form-control mb-2' type='type' placeholder='Enter amount...' />
                             <button
                                 onClick={sellPintHandler}
                                 disabled={!isBottoneBuyAbilitato}
-                                className='button is-primary mt-3' >
+                                className='btn btn-secondary' >
                                 sell</button>
 
 
@@ -351,8 +351,6 @@ const Home = () =>  {
 
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                           </div>
                         </div>
                       </div>

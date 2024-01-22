@@ -9,8 +9,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 /// @notice You can use this contract to buy and sell PTNT, see accounts balances
 contract PatentToken is ERC20{
 
-    address public owner;
-    uint public filingFee;
+    address private owner;
+    uint private filingFee;
     
     event BuyPTNT(address indexed buyer, uint value);
     event SellPTNT(address indexed seller, uint value);

@@ -31,10 +31,10 @@ contract PatentNFT is ERC721URIStorage{
         State state;
     }
 
-    IPatentToken public token;
+    IPatentToken private token;
     uint private patentCounter;
-    mapping(uint => Patent) public patents;
-    mapping(uint => Bid[]) bids;
+    mapping(uint => Patent) private patents;
+    mapping(uint => Bid[]) private bids;
 
     //evento deposito
     event PatentFiled(uint indexed patentId, address owner);

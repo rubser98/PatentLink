@@ -12,46 +12,82 @@ import  axios from'axios'
 import  FormData from 'form-data'
 
 
-const vendite = () =>  {
+const myWallet = () =>  {
     const loaded  = useRef(false);
     var cardList = []
     const [cardData, setCard]  = useState([]);
-        
-   
     const pathBasePinata = "https://gateway.pinata.cloud/ipfs/"
     const [error, setError] = useState('')
-    const [conteggioPint, setConteggio] = useState('')
+    const [isConnectedToMetamask , setConnection] = useState(false)
     const [web3, setWeb3] = useState(null);
-    const [isVisiblePatents, setIsVisible] = useState(true);
-    const [isVisibleBids, setIsVisibleBids] = useState(true);
-   
-   
+
+
+    const metamaskConnetcionHandler = async() => {
+      var _web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts() 
+      setWeb3(_web3)
+      
+      
+      if (accounts.length === 0) {
+        console.log('Metamask disconnesso');
+        setConnection(false)
+        cardList = []
+        setCard([])
+
+      }
+      else
+      {
+        setConnection(true)
+        cardList = []
+        setCard([])
+        getPatentHandler(_web3)
+      
+
+      }
+
+      window.ethereum.on('accountsChanged', (accounts) => {
+          
+          if (accounts.length === 0) {
+            var _web3 = new Web3(window.ethereum)
+            console.log('Metamask disconnesso');
+            cardList = []
+            setCard([])
+            setConnection(false)
+    
+          } else {
+            setConnection(true)
+            cardList = []
+            setCard([])
+            var _web3 = new Web3(window.ethereum)
+            getPatentHandler(_web3)
+          
+          }
+      })
+
+  }
+ 
     useEffect(() => {
       if (!loaded.current) {
         loaded.current = true
-        console.log("ciaooooooo")
-      
-          loadHandler()
+        metamaskConnetcionHandler()
       }
 
 
   }, [])
-    const loadHandler = async () => 
-    {
-      var _web3 = new Web3(window.ethereum)
-      setWeb3(_web3)
-      getPatentHandler(_web3)
-
-    }
+  
 
   
     const connectWalletHandler = async () => {
+      console.log("test")
 
       try {
 
           if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
             
+             
+              await window.ethereum.request({ method: "eth_requestAccounts" })
               var _web3 = new Web3(window.ethereum)
+              setConnection(true)
               setWeb3(_web3)
              
               
@@ -117,16 +153,37 @@ const vendite = () =>  {
             <nav className="navbar mt-4 mb-4">
                 <div className='container'>
                     <div className='navbar-brand ml-15'>
-                        <h1>saleHome</h1>
+                        <h1>myWallet</h1>
                     </div>
                     <div  className='navbar-item'>
-                      <form action="/patent_ruben">
-                       <button className='button is-primary'> buyNft</button>
+                      <form action="/homeSales">
+                       <button className='button is-primary'> buyPNT</button>
                       </form>
 
                     </div>
+                    <div  className='navbar-item'>
+                      <form action="/">
+                       <button className='button is-primary'> home</button>
+                      </form>
+
+                    </div>
+                    
+                    <div  className='navbar-item'>
+                      <form action="/patentDeploy">
+                       <button className='button is-primary'> patentDeployHome</button>
+                      </form>
+
+                    </div>
+                    <div  className='navbar-item'>
+                      <form action="/patentGalleryHome">
+                       <button className='button is-primary'> patentGallery</button>
+                      </form>
+
+                    </div>
+                   
                     <div className='navbar-end'>
                         <button
+                            disabled={isConnectedToMetamask}
                             onClick={connectWalletHandler}
                             className='button is-primary'>connect wallet
                             
@@ -140,11 +197,7 @@ const vendite = () =>  {
             </nav>
             
           
-            <section>
-                <div >
-                    <p> {conteggioPint}</p>
-                </div>
-            </section>
+          
            
            <div  className={styles.div} >
               <h1>Tabella di Card</h1>
@@ -155,4 +208,4 @@ const vendite = () =>  {
     )
 }
 
-export default vendite
+export default myWallet

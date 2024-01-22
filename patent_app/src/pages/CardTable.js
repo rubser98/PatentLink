@@ -4,27 +4,54 @@ import { Card, CardContent, Grid, Typography, Button, dividerClasses } from '@mu
 import { useState, useEffect } from 'react'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import Swal from 'sweetalert2';
+import Web3 from 'web3'
 var prova = ""
+
 const CardTable = ({ data }) => {
 
-
+ 
   const [isVisiblePatents, setIsVisiblePatents] = useState(true);
   const [isVisibleBids, setIsVisibleBids] = useState(false);
   const [dataBids, setBids] = useState( [])
 
 
   const acceptBidHandler = async(id, index, sender) => {
-    console.log(id, index, sender)
-    await patentNFTContract.methods.acceptBid(BigInt(id),BigInt(index)).send( {from: sender,gas: '300000'})
+    var _web3 = new Web3(window.ethereum)
+    const transactionObject = {
+      from: sender,
+      to: patentNFTContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
+      gas: '300000',  // Gas limit
+      data: patentNFTContract.methods.acceptBid(BigInt(id),BigInt(index)).encodeABI(), // Includi il metodo e i suoi parametri
+     }
+   
+   
+    _web3.eth.sendTransaction(transactionObject)
     .then(receipt => {
-      // La transazione è stata inviata con successo
-      console.log('Transazione avvenuta con successo:', receipt);
-      // Puoi eseguire altre azioni qui con la risposta della transazione
+    
+      Swal.fire({
+        icon: 'success',
+        title: 'Operazione completata!',
+        text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    }).then(result => {
+      
+      window.location.reload()
+    })
+    handleGoBack()
+      
     })
     .catch(error => {
-      // Si è verificato un errore durante l'invio della transazione
-      console.error('Errore durante l\'invio della transazione:', error);
-      // Puoi gestire l'errore qui o eseguire azioni specifiche in base al tipo di errore
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Operazione andata in errore!',
+        text: 'Errore durante l\'invio della transazione: ' + (error.data === undefined ? error : error.data.message) + "",
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    })
+   
+      
     });
 
 
@@ -33,14 +60,31 @@ const CardTable = ({ data }) => {
     console.log(id, index, sender)
     await patentNFTContract.methods.rejectBid(BigInt(id),BigInt(index)).send( {from: sender,gas: '300000'})
     .then(receipt => {
-      // La transazione è stata inviata con successo
-      console.log('Transazione avvenuta con successo:', receipt);
-      // Puoi eseguire altre azioni qui con la risposta della transazione
+      var appoggio = dataBids
+      appoggio[index].state = 0
+      setBids(appoggio)
+      console.log(appoggio)
+      console.log(dataBids)
+      Swal.fire({
+        icon: 'success',
+        title: "hai rifiutato l'operazione!",
+        text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    }).then(result => {
+      
+      
+    })
+      
     })
     .catch(error => {
-      // Si è verificato un errore durante l'invio della transazione
-      console.error('Errore durante l\'invio della transazione:', error);
-      // Puoi gestire l'errore qui o eseguire azioni specifiche in base al tipo di errore
+      Swal.fire({
+        icon: 'error',
+        title: "errore!",
+        text: "qualcosa è andato storto durante l'operazione" ,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    })
     });
 
   }
@@ -56,6 +100,7 @@ const CardTable = ({ data }) => {
   const handleGoBack = () =>  {
     setIsVisibleBids(false)
     setIsVisiblePatents(true)
+    
     
 
   }
@@ -138,16 +183,17 @@ const CardTable = ({ data }) => {
             <Typography variant="h6"> Offerta N.{index + 1}</Typography>
             <Typography variant="h6"> id NFT : {Number(item.id)}</Typography>
             <Typography variant="h6"> Amount : {Number(item.amount)*Math.pow(10,-18)} PNT </Typography>
-            <Typography variant="h6"> State : {Number(item.state)}</Typography>
             <Typography variant="body2">Bidder : {item.bidder}</Typography>
           </CardContent>
           <div style={{display: "flex",gap: "160px" }}>
-          <Button variant="contained" color="primary"onClick={() => acceptBidHandler(item.id, index, item.sender)}>
+          <Button  style={{ display: Number(item.state == 2) ? 'block' : 'none' }}variant="contained" color="primary"onClick={() => acceptBidHandler(item.id, index, item.sender)}>
             Accept
           </Button>
-          <Button variant="contained" color="primary"onClick={() => rejectBidHandler ( item.id, index, item.sender)}>
+          <Button style={{ display: Number(item.state == 2) ? 'block' : 'none' }} variant="contained" color="primary"onClick={() => rejectBidHandler ( item.id, index, item.sender)}>
             Reject
           </Button>
+          <span style={{ display: item.state == 0 ? 'block' : 'none' , color : 'red'}}>REJECTED</span> 
+          <span style={{ display: item.state == 1 ? 'block' : 'none' , color : 'green'}}>ACCEPTED</span> 
 
           </div>
           

@@ -31,7 +31,7 @@ const PatentGalleryFormat = ({ data }) => {
         data: patentNFTContract.methods.makeBid(,1).encodeABI(), // Includi il metodo e i suoi parametri
     }; */
       Swal.fire({
-        title: 'Inserisci una cifra:',
+        title: 'Inserisci una cifra in PNT:',
         input: 'number',
         showCancelButton: true,
         confirmButtonText: 'Conferma',
@@ -45,7 +45,18 @@ const PatentGalleryFormat = ({ data }) => {
             // Puoi fare qualcos'altro con la cifra inserita
             var address = await patentNFTContract.methods.ownerOf(id).call()
             console.log(address)
-            await patentNFTContract.methods.makeBid(id,cifra).send({from : accounts[0], gas:300000}).catch(function (error) {
+            await patentNFTContract.methods.makeBid(id,cifra).send({from : accounts[0], gas:300000})
+            .then(function (value){
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Operazione si è conclusa con successo!',
+                text: "hai fatto un'offerta dal valore di: " + result.value + " PNT",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+              })
+            })
+            .catch(function (error) {
               // Gestione dell'errore
               console.log(error)
               Swal.fire({
@@ -58,8 +69,17 @@ const PatentGalleryFormat = ({ data }) => {
           });
 
           }
+         
+          
+          
         } else {
-          console.log('Operazione annullata');
+          Swal.fire({
+            icon: 'error',
+            title: 'Operazione annullata!',
+            text: "hai annulato l'operazione",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        })
         }
         
       });

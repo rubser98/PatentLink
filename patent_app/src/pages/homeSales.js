@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import 'bulma/css/bulma.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import Web3 from 'web3'
 import styles from '../styles/homeSale.module.css'
 
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
  
 const vendite = () =>  {
+    const loaded  = useRef(false);
     const [error, setError] = useState('')
     const [totale, setTotale] = useState(0)
     const [conteggioPint, setConteggio] = useState('')
@@ -19,17 +20,59 @@ const vendite = () =>  {
     const [sellCount, setsellCount] = useState(0)
     const [isBottoneBuyAbilitato, setIsBottoneBuyAbilitato] = useState(false);
     const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
+    const [isConnectedToMetamask , setConnection] = useState(false)
 
 
     useEffect(() => {
 
-        getTotaleHandler()
+        if (!loaded.current) {
+            loaded.current = true
+           
+          
+            getTotaleHandler()
+            metamaskConnetcionHandler()
+          }
+    
+    },[])
 
+    const metamaskConnetcionHandler = async() => {
 
-    })
+        var _web3 = new Web3(window.ethereum)
+        const accounts = await _web3.eth.getAccounts() 
 
+        if (accounts.length === 0) {
+            console.log('Metamask disconnesso');
+            setConnection(false)
+            setConteggio("")
+
+            
+          } else {
+            setConnection(true)
+            getMyCountPintHandler(_web3)
+          
+          }
+
+        window.ethereum.on('accountsChanged', (accounts) => {
+            
+            if (accounts.length === 0) {
+              console.log('Metamask disconnesso');
+              setConnection(false)
+              setConteggio("")
+
+              
+            } else {
+              setConnection(true)
+              getMyCountPintHandler(_web3)
+            
+            }
+        })
+
+    }
+
+    
     const getMyCountPintHandler = async (web3) => {
-        console.log(web3)
+        
+        //funzione che serve a prendere in visualizzazione il propprio numero di PNT
         const accounts = await web3.eth.getAccounts()
         console.log(accounts)
         console.log(accounts[0])
@@ -41,10 +84,13 @@ const vendite = () =>  {
     }
 
     const updatePintQty = event => {
+      
         //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
         setBuyCount((event.target.value * Math.pow(10, 18)).toFixed(0))
+        //inserimento del costo in ETH
         setEtherCount(event.target.value)
         console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
+        
 
 
     }
@@ -56,9 +102,10 @@ const vendite = () =>  {
 
     }
     const sellPintHandler = async () => {
-        console.log(web3)
+        var _web3 = new Web3(window.ethereum)
+        console.log(_web3)
         //web3 = new Web3(window.ethereum)
-        const accounts = await web3.eth.getAccounts()
+        const accounts = await _web3.eth.getAccounts()
       
 
         console.log(etherSellCount)
@@ -90,7 +137,7 @@ const vendite = () =>  {
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'OK'
                                 })
-                                getMyCountPintHandler(web3)
+                                getMyCountPintHandler(_web3)
                             })
                             .catch(function (error) {
                                 // Gestione dell'errore
@@ -122,9 +169,10 @@ const vendite = () =>  {
 
 
     const buyPintHandler = async () => {
-        console.log(web3)
+       
         //web3 = new Web3(window.ethereum)
-        const accounts = await web3.eth.getAccounts()
+        var _web3 = new Web3(window.ethereum)
+        const accounts = await _web3.eth.getAccounts()
         console.log(buyCount)
         console.log(etherCount)
 
@@ -135,10 +183,10 @@ const vendite = () =>  {
                 from: accounts[0],
                 to: patentTokenContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
                 gas: '300000',  // Gas limit
-                value: web3.utils.toWei(etherCount, "ether"),
+                value: _web3.utils.toWei(etherCount, "ether"),
                 data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
             };
-            web3.eth.sendTransaction(transactionObject)
+            _web3.eth.sendTransaction(transactionObject)
                 .then(function (receipt) {
                     // Gestione del successo
                     Swal.fire({
@@ -148,7 +196,7 @@ const vendite = () =>  {
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'
                     })
-                    getMyCountPintHandler(web3)
+                    getMyCountPintHandler(_web3)
 
                 })
                 .catch(function (error) {
@@ -197,6 +245,7 @@ const vendite = () =>  {
             if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
                 await window.ethereum.request({ method: "eth_requestAccounts" })
                 var _web3 = new Web3(window.ethereum)
+                setConnection(true)
                 setWeb3(_web3)
                 getMyCountPintHandler(_web3)
                 setIsBottoneBuyAbilitato(true)
@@ -229,12 +278,39 @@ const vendite = () =>  {
                     <div className='navbar-brand'>
                         <h1>saleHome</h1>
                     </div>
+                    <div  className='navbar-item'>
+                      <form action="/myWallet">
+                       <button className='button is-primary'> myWallet </button>
+                      </form>
+
+                    </div>
+                    <div  className='navbar-item'>
+                      <form action="/">
+                       <button className='button is-primary'> home</button>
+                      </form>
+
+                    </div>
+                    
+                    <div  className='navbar-item'>
+                      <form action="/patentDeploy">
+                       <button className='button is-primary'> patentDeployHome</button>
+                      </form>
+
+                    </div>
+                    <div  className='navbar-item'>
+                      <form action="/patentGalleryHome">
+                       <button className='button is-primary'> patentGallery</button>
+                      </form>
+
+                    </div>
                     <div className='navbar-end'>
                         <button
+                            disabled={isConnectedToMetamask}
                             onClick={connectWalletHandler}
                             className='button is-primary'>connect wallet
                             
                         </button>
+                      
 
                     </div>
 
@@ -260,7 +336,7 @@ const vendite = () =>  {
                             <button
                                 onClick={buyPintHandler}
                                 className='button is-primary mt-3'
-                                disabled={!isBottoneSellAbilitato} >
+                                disabled={!isConnectedToMetamask} >
                                 buy</button>
 
 
@@ -277,7 +353,7 @@ const vendite = () =>  {
                             <input onChange={updatePintQtySell} className='input' type='type' placeholder='Enter amount...' />
                             <button
                                 onClick={sellPintHandler}
-                                disabled={!isBottoneBuyAbilitato}
+                                disabled={!isConnectedToMetamask}
                                 className='button is-primary mt-3' >
                                 sell</button>
 

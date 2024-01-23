@@ -4,244 +4,304 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 import Swal from 'sweetalert2';
+import { useState, useEffect,useRef } from 'react'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import Web3 from 'web3'
-import { useState, useEffect } from 'react'
+import { purple } from '@mui/material/colors'
+
 
 
 const Home = () =>  {
-    const [error, setError] = useState('')
-    const [totale, setTotale] = useState(0)
-    const [conteggioPint, setConteggio] = useState('')
-    const [buyCount, setBuyCount] = useState(0)
-    const [etherCount, setEtherCount] = useState('')
-    const [web3, setWeb3] = useState(null);
-    const [etherSellCount, setSellEtherCount] = useState('')
-    const [sellCount, setsellCount] = useState(0)
-    const [isBottoneBuyAbilitato, setIsBottoneBuyAbilitato] = useState(false);
-    const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
+  const loaded  = useRef(false);
+  const [error, setError] = useState('')
+  const [totale, setTotale] = useState(0)
+  const [conteggioPint, setConteggio] = useState('')
+  const [buyCount, setBuyCount] = useState(0)
+  const [etherCount, setEtherCount] = useState('')
+  const [web3, setWeb3] = useState(null);
+  const [etherSellCount, setSellEtherCount] = useState('')
+  const [sellCount, setsellCount] = useState(0)
+  const [isBottoneBuyAbilitato, setIsBottoneBuyAbilitato] = useState(false);
+  const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
+  const [isConnectedToMetamask , setConnection] = useState(false)
 
 
-    useEffect(() => {
+  useEffect(() => {
 
-        getTotaleHandler()
+      if (!loaded.current) {
+          loaded.current = true
+         
+        
+          getTotaleHandler()
+          metamaskConnetcionHandler()
+        }
+  
+  },[])
 
+  const changeConnectButton = async(bool) => {
 
+    const connectbutton = document.getElementById("connectbutton")
+
+    if(bool==true){
+      connectbutton.textContent = "MyWallet"
+      connectbutton.style.backgroundColor = "#6f42c1"
+    }
+    else{
+      connectbutton.textContent = "connect wallet"
+      connectbutton.style.backgroundColor = "bg-secondary"
+    }
+  }
+
+  const metamaskConnetcionHandler = async() => {
+
+    var _web3 = new Web3(window.ethereum)
+    const accounts = await _web3.eth.getAccounts() 
+
+    if (accounts.length === 0) {
+        console.log('Metamask disconnesso');
+        setConnection(false)
+        changeConnectButton(false)
+        setConteggio("")
+
+        
+      } else {
+        setConnection(true)
+        changeConnectButton(true)
+        getMyCountPintHandler(_web3)
+      
+      }
+
+    window.ethereum.on('accountsChanged', (accounts) => {
+        
+        if (accounts.length === 0) {
+          console.log('Metamask disconnesso');
+          setConnection(false)
+          changeConnectButton(false)
+          setConteggio("")
+
+          
+        } else {
+          setConnection(true)
+          changeConnectButton(true)
+          getMyCountPintHandler(_web3)
+        
+        }
     })
 
-    const getMyCountPintHandler = async (web3) => {
-        console.log(web3)
-        const accounts = await web3.eth.getAccounts()
-        console.log(accounts)
-        console.log(accounts[0])
-        var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
-        count = Number(count)
-        count = count / Math.pow(10, 18).toFixed(0)
-        console.log(count)
-        setConteggio("this is your amount of pint : " + count)
-    }
+}
 
-    const updatePintQty = event => {
-        //function needed to  the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
-        setBuyCount((event.target.value * Math.pow(10, 12)).toFixed(0))
-        setEtherCount(event.target.value)
-        console.log((event.target.value * Math.pow(10, 12)).toFixed(0))
+  
+  const getMyCountPintHandler = async (web3) => {
+      
+      //funzione che serve a prendere in visualizzazione il propprio numero di PNT
+      const accounts = await web3.eth.getAccounts()
+      console.log(accounts)
+      console.log(accounts[0])
+      var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
+      count = Number(count)
+      count = (count * Math.pow(10, -18)).toFixed(0)
+      console.log(count)
+      setConteggio("this is your amount of pint : " + count)
+  }
 
-
-    }
-    const updatePintQtySell = event => {
-        //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
-        setsellCount((event.target.value * Math.pow(10, 12)).toFixed(0))
-        setSellEtherCount(event.target.value)
-        console.log((event.target.value * Math.pow(10, 12)).toFixed(0))
-
-    }
-    const sellPintHandler = async () => {
-        console.log(web3)
-        //web3 = new Web3(window.ethereum)
-        const accounts = await web3.eth.getAccounts()
+  const updatePintQty = event => {
+    
+      //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
+      setBuyCount((event.target.value * Math.pow(10, 18)).toFixed(0))
+      //inserimento del costo in ETH
+      setEtherCount(event.target.value)
+      console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
       
 
-        console.log(etherSellCount)
-        console.log(sellCount)
-        Swal.fire({
-            title: 'Vuoi procedere?',
-            text: 'Stai per vendere ' + etherSellCount + ' PNT al prezzo di ' + etherSellCount + ' ETH!',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sì, procedi!'
-        })
-            .then(async (result) => {
-                if (result.isConfirmed) {
-                    // Azione quando l'utente clicca su "Sì, procedi!"
-                    try {
 
-                        console.log(accounts[0])
+  }
+  const updatePintQtySell = event => {
+      //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
+      setsellCount((event.target.value * Math.pow(10, 18)).toFixed(0))
+      setSellEtherCount(event.target.value)
+      console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
 
+  }
+  const sellPintHandler = async () => {
+      var _web3 = new Web3(window.ethereum)
+      console.log(_web3)
+      //web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts()
+    
 
-                        await patentTokenContract.methods.sellToken(sellCount).send({ from: accounts[0] })
-                            .then(function (receipt) {
-                                // Gestione del successo
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Operazione completata!',
-                                    text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'OK'
-                                })
-                                getMyCountPintHandler(web3)
-                            })
-                            .catch(function (error) {
-                                // Gestione dell'errore
-                                console.log(error)
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Operazione andata in errore!',
-                                    text: 'Errore durante l\'invio della transazione: ' + (error.data === undefined ? error : error.data.message) + "\n: insert a lower number of token",
-                                    confirmButtonColor: '#3085d6',
-                                    confirmButtonText: 'OK'
-                                })
-                            });
+      console.log(etherSellCount)
+      console.log(sellCount)
+      Swal.fire({
+          title: 'Vuoi procedere?',
+          text: 'Stai per vendere ' + etherSellCount + ' PNT al prezzo di ' + etherSellCount + ' ETH!',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sì, procedi!'
+      })
+          .then(async (result) => {
+              if (result.isConfirmed) {
+                  // Azione quando l'utente clicca su "Sì, procedi!"
+                  try {
 
-                    }
-                    catch (err) {
-                        console.log(err)
-                        setError(err + "")
-                    }
-
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // Azione quando l'utente clicca su "Annulla"
-                    Swal.fire('Annullato', 'La tua azione è stata annullata.', 'info');
-                }
-            });
+                      console.log(accounts[0])
 
 
+                      await patentTokenContract.methods.sellToken(sellCount).send({ from: accounts[0] })
+                          .then(function (receipt) {
+                              // Gestione del successo
+                              Swal.fire({
+                                  icon: 'success',
+                                  title: 'Operazione completata!',
+                                  text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'OK'
+                              })
+                              getMyCountPintHandler(_web3)
+                          })
+                          .catch(function (error) {
+                              // Gestione dell'errore
+                              console.log(error)
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Operazione andata in errore!',
+                                  text: 'Errore durante l\'invio della transazione: ' + (error.data === undefined ? error : error.data.message) + "\n: insert a lower number of token",
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'OK'
+                              })
+                          });
 
-    }
+                  }
+                  catch (err) {
+                      console.log(err)
+                      setError(err + "")
+                  }
 
-
-    const buyPintHandler = async () => {
-        console.log(web3)
-        //web3 = new Web3(window.ethereum)
-        const accounts = await web3.eth.getAccounts()
-        console.log(buyCount)
-        console.log(etherCount)
-
-        try {
-
-            console.log(accounts[0])
-            const transactionObject = {
-                from: accounts[0],
-                to: patentTokenContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
-                gas: '300000',  // Gas limit
-                value: web3.utils.toWei(etherCount, "ether"),
-                data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
-            };
-            web3.eth.sendTransaction(transactionObject)
-                .then(function (receipt) {
-                    // Gestione del successo
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Operazione completata!',
-                        text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
-                    })
-                    getMyCountPintHandler(web3)
-
-                })
-                .catch(function (error) {
-                    // Gestione dell'errore
-                    console.log(error)
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Operazione andata in errore!',
-                        text: 'Errore durante l\'invio della transazione: ' + error.data.message,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
-                    })
-                });
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  // Azione quando l'utente clicca su "Annulla"
+                  Swal.fire('Annullato', 'La tua azione è stata annullata.', 'info');
+              }
+          });
 
 
 
-        }
-        catch (err) {
-            console.log(err)
-            setError(err + "")
-        }
+  }
 
 
-    }
+  const buyPintHandler = async () => {
+     
+      //web3 = new Web3(window.ethereum)
+      var _web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts()
+      console.log(buyCount)
+      console.log(etherCount)
+
+      try {
+
+          console.log(accounts[0])
+          const transactionObject = {
+              from: accounts[0],
+              to: patentTokenContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
+              gas: '300000',  // Gas limit
+              value: _web3.utils.toWei(etherCount, "ether"),
+              data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
+          };
+          _web3.eth.sendTransaction(transactionObject)
+              .then(function (receipt) {
+                  // Gestione del successo
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Operazione completata!',
+                      text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+                      confirmButtonColor: '#3085d6',
+                      confirmButtonText: 'OK'
+                  })
+                  getMyCountPintHandler(_web3)
+
+              })
+              .catch(function (error) {
+                  // Gestione dell'errore
+                  console.log(error)
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Operazione andata in errore!',
+                      text: 'Errore durante l\'invio della transazione: ' + error.data.message,
+                      confirmButtonColor: '#3085d6',
+                      confirmButtonText: 'OK'
+                  })
+              });
 
 
 
+      }
+      catch (err) {
+          console.log(err)
+          setError(err + "")
+      }
 
-    const getTotaleHandler = async () => {
-        try {
 
-            const totale2 = await patentTokenContract.methods.totalSupply().call()
+  }
 
-            setTotale((Number(totale2) / Math.pow(10, 18)).toFixed(0))
+  const getTotaleHandler = async () => {
+      try {
 
-        }
-        catch (e) {
-            console.log(e)
-        }
+          const totale2 = await patentTokenContract.methods.totalSupply().call()
 
-    }
-    const connectWalletHandler = async () => {
+          setTotale((Number(totale2) / Math.pow(10, 18)).toFixed(0))
 
-        try {
-            if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
-                var _web3 = new Web3(window.ethereum)
-                document.getElementById("connectbutton").disabled=true
-                document.getElementById("connectbutton").textContent=accounts[0]
-                setWeb3(_web3)
-                getMyCountPintHandler(_web3)
-                setIsBottoneBuyAbilitato(true)
-                setIsBottoneSellAbilitato(true)
+      }
+      catch (e) {
+          console.log(e)
+      }
 
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Operazione andata in errore!',
-                    text: 'it is required to install metamask ' + error.data.message,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-            
-                })
-            }
-        }
-        catch (e) {
-            setError("l'utente ha rifiutato la connessione")
-        }
-    }
+  }
+  const connectWalletHandler = async () => {
+
+      try {
+          if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
+              await window.ethereum.request({ method: "eth_requestAccounts" })
+              var _web3 = new Web3(window.ethereum)
+              setConnection(true)
+              setWeb3(_web3)
+              getMyCountPintHandler(_web3)
+              setIsBottoneBuyAbilitato(true)
+              setIsBottoneSellAbilitato(true)
+          }
+          else {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Operazione andata in errore!',
+                  text: 'it is required to install metamask ' + error.data.message,
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'OK'
+              })
+          }
+      }
+      catch (e) {
+          setError("l'utente ha rifiutato la connessione")
+      }
+  }
     return ( 
         <>
         <Head>
-          <title>Create Next App</title>
+          <title>♥BloackchainProject♥</title>
           <meta name="description" content="Generated by create next app" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="miniCiccio.png" />
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
         </Head>
   
   
         <main class="bg-dark">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav id="mynavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
+        <img width="30px" height="auto" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
           <a class="navbar-brand " href="#">PatentLink</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
+            <ul class="nav nav-pills navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                <a class="nav-link" href="#home">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#tokens">Tokens</a>
@@ -250,7 +310,7 @@ const Home = () =>  {
                 <a class="nav-link" href="#explore">Explore</a>
               </li>
               <li>
-              <button id = "connectbutton" type="button" class="btn btn-secondary"
+              <button id = "connectbutton" type="button" class="btn btn-secondary" 
                 onClick={connectWalletHandler}
                >connect wallet
                 </button>
@@ -295,9 +355,8 @@ const Home = () =>  {
                   <h1 class="display-5 fw-bolder text-white mb-2">What is a PNT token?</h1>
                   <p class="lead fw-normal text-white-50 mb-4">ADD DESCRIPTION Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                    
                   
-                    <button type="button" class="btn btn-secondary btn-lg px-4 me-sm-3" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" onClick={connectWalletHandler} class="btn btn-secondary btn-lg px-4 me-sm-3" data-toggle="modal" data-target="#exampleModal">
                       Buy or sell
                     </button>
   
@@ -360,7 +419,7 @@ const Home = () =>  {
                 </div>
               </div>
               <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-              <img class="img-fluid rounded-3 my-5" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp" alt="...">
+              <img width="300" height="auto" class="img-fluid rounded-3 my-5" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp" alt="...">
               </img>
               </div>
             </div>
@@ -374,7 +433,7 @@ const Home = () =>  {
           <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                  <h1 class="display-5 fw-bolder text-white mb-2">A Bloackchain platform buying and selling your Patents</h1>
+                  <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1>
                   <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                       <a class="btn btn-secondary btn-lg px-4 me-sm-3" href="#features">Get Started</a>

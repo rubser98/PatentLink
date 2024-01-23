@@ -72,11 +72,15 @@ contract PatentNFT is ERC721URIStorage{
         return patentCounter;
     }
 
+    ///@notice get bids of a particular patent nft
+    ///@param tokenId nft id
     function getBids(uint tokenId) public view returns(Bid[] memory){
         //require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
         return bids[tokenId];
     }
 
+    ///@notice reject the indicated bid for specific NFT
+    ///@param tokenId NFT id @param indexBid index of the token's bids list
     function rejectBid(uint tokenId, uint indexBid) public{
         require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
         require(bids[tokenId].length > indexBid, 'Index out of range');
@@ -84,6 +88,8 @@ contract PatentNFT is ERC721URIStorage{
         emit BidRefused(tokenId, ownerOf(tokenId), bids[tokenId][indexBid].bidder);
     }
 
+    ///@notice accept the indicated bid for specific NFT
+    ///@param tokenId NFT id @param indexBid index of the token's bids list
     function acceptBid(uint tokenId, uint indexBid) public{
         require(ownerOf(tokenId) == msg.sender,'You are not the owner of the patent');
         require(bids[tokenId].length > indexBid, 'Index out of range');
@@ -97,6 +103,8 @@ contract PatentNFT is ERC721URIStorage{
         clearBids(tokenId);
     }
 
+    ///@notice make a bid for a specific NFT
+    ///@param patentId NFT id @param amount amount in PNT of the bid
     function makeBid(uint patentId, uint amount) public{
         require(ownerOf(patentId) != address(0), 'The patent does not exist');
         require(msg.sender != ownerOf(patentId),'You are already the owner of the patent');
@@ -111,17 +119,23 @@ contract PatentNFT is ERC721URIStorage{
         emit MakeBid(patentId, ownerOf(patentId), msg.sender);
     }
 
+    ///@notice clear bid list of a specific NFT
+    ///@param patentId NFT id
     function clearBids(uint patentId) internal {
         while(bids[patentId].length > 0){
             bids[patentId].pop();
         }
     }
 
+    ///@notice get indicated patent
+    ///@param patentId NFT id
     function getPatent(uint patentId) public view returns(Patent memory){
         return patents[patentId];
 
     }
 
+    ///@notice get the list of NFT id for a specific user
+    ///@param owner address of the user
     function getPatentsByOwner(address owner) external view returns (uint[] memory) {
         uint tokenCount = balanceOf(owner);
         uint[] memory tokens = new uint[](tokenCount);

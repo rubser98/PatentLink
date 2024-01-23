@@ -24,14 +24,14 @@ contract PatentToken is ERC20{
 
 
     constructor(uint _filingFee)
-        ERC20("PatentToken", "PTNT") {
+        ERC20("PatentToken", "PNT") {
             owner = msg.sender;
             filingFee = _filingFee;
             _mint(owner, 100000 * (10 ** decimals()));
         }
 
-    ///@notice It allows sender to purchase PTNT
-    ///@param amount amount of PTNT to purchase
+    ///@notice It allows sender to purchase PNT
+    ///@param amount amount of PNT to purchase
     function buyToken(uint amount) public payable{
         require(amount > 0, 'No amount of PTNT are specified');
         require(balanceOf(owner) >= amount, 'Not enough PTNT in the economy');
@@ -41,7 +41,7 @@ contract PatentToken is ERC20{
     }
 
     ///@notice It allows sender to convert PTNT into ETH
-    ///@param amount amount of PTNT to sell  
+    ///@param amount amount of PNT to sell  
     function sellToken(uint amount) public{
         require(amount > 0, 'No amount of PTNT are specified');
         require(balanceOf(msg.sender) >= amount, 'You do not have that amount of PTNT');
@@ -65,16 +65,19 @@ contract PatentToken is ERC20{
         filingFee = amount;
     }
 
+    ///@notice get the price of filing fee
     function getFilingFee() public view returns(uint){
         return filingFee;
     }
 
-    ///@notice emit PTNT 
+    ///@notice emit PNT 
     ///@param amount amount of PTNT minted
     function mint(uint amount) public onlyOwner{
         _mint(owner, amount * (10 ** decimals()));
     }
 
+    ///@notice set new owner of the contract
+    ///@param _newOwner address of new owner
     function changeOwner(address _newOwner) public onlyOwner{
         require(_newOwner != address(0));
         _transfer(owner, _newOwner, balanceOf(owner));
@@ -82,6 +85,8 @@ contract PatentToken is ERC20{
 
     }
 
+    ///@notice transfer amount of PNT
+    ///@param from address who send @param to address who receive @param amount amount of transferred PNT
     function transfer(address from, address to, uint amount) external returns(bool){
         _transfer(from, to,amount);
         return true;

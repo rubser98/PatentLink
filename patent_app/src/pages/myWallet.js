@@ -1,6 +1,5 @@
 
 import Head from 'next/head'
-import 'bulma/css/bulma.css'
 import styled from 'styled-components';
 import { useState, useEffect,useRef } from 'react'
 import Web3 from 'web3'
@@ -10,7 +9,23 @@ import CardTable from './CardTable';
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import  axios from'axios'
 import  FormData from 'form-data'
+import Home from '.';
 
+
+const changeConnectButton = async(bool) => {
+  
+  const connectbutton = document.getElementById("connectbutton")
+
+  if(bool==true){
+    connectbutton.textContent = "MyWallet"
+    connectbutton.style.backgroundColor = "#6f42c1"
+    connectbutton.href = "/myWallet"
+  }
+  else{
+    connectbutton.textContent = "connect wallet"
+    connectbutton.style.backgroundColor = "bg-secondary"
+  }
+}
 
 const myWallet = () =>  {
     const loaded  = useRef(false);
@@ -23,48 +38,43 @@ const myWallet = () =>  {
 
 
     const metamaskConnetcionHandler = async() => {
+
       var _web3 = new Web3(window.ethereum)
       const accounts = await _web3.eth.getAccounts() 
-      setWeb3(_web3)
-      
-      
+  
       if (accounts.length === 0) {
-        console.log('Metamask disconnesso');
-        setConnection(false)
-        cardList = []
-        setCard([])
-
-      }
-      else
-      {
-        setConnection(true)
-        cardList = []
-        setCard([])
-        getPatentHandler(_web3)
-      
-
-      }
-
+          console.log('Metamask disconnesso');
+          setConnection(false)
+          changeConnectButton(false)
+          setConteggio("")
+  
+          
+        } else {
+          setConnection(true)
+          changeConnectButton(true)
+          console.log(1)
+          //getMyCountPintHandler(_web3)
+        
+        }
+  
       window.ethereum.on('accountsChanged', (accounts) => {
           
           if (accounts.length === 0) {
-            var _web3 = new Web3(window.ethereum)
             console.log('Metamask disconnesso');
-            cardList = []
-            setCard([])
             setConnection(false)
-    
+            changeConnectButton(false)
+            setConteggio("")
+  
+            
           } else {
             setConnection(true)
-            cardList = []
-            setCard([])
-            var _web3 = new Web3(window.ethereum)
-            getPatentHandler(_web3)
+            changeConnectButton(true)
+            //getMyCountPintHandler(_web3)
           
           }
       })
-
-  }
+  
+  }  
  
     useEffect(() => {
       if (!loaded.current) {
@@ -75,7 +85,6 @@ const myWallet = () =>  {
 
   }, [])
   
-
   
     const connectWalletHandler = async () => {
       console.log("test")
@@ -142,15 +151,20 @@ const myWallet = () =>  {
         }
       }
 
+
     return (
-        <div className={styles.main}>
-            <Head>
+        <>
+        <Head>
+
                 <title>My Wallet</title>
                 <meta name="description" content="home" />
-            </Head>
+                <link rel="icon" href="miniCiccio.png" />
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
+        </Head>
 
-
-            <nav className="navbar mt-4 mb-4">
+        <main class="vh-100 bg bg-dark">
+        <div class = "bg-dark">
+            {/* <nav className="navbar mt-4 mb-4">
                 <div className='container'>
                     <div className='navbar-brand ml-15'>
                         <h1>myWallet</h1>
@@ -194,17 +208,65 @@ const myWallet = () =>  {
                 </div>
                 
 
-            </nav>
-            
-          
-          
-           
-           <div  className={styles.div} >
-              <h1>Tabella di Card</h1>
-             <CardTable  data={cardData} />
-           </div>
+            </nav> */}
+        <nav id="mynavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow p-3 mb-5 rounded">
+        <div class="container-fluid">
+        <img width="30px" height="auto" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
+          <a class="navbar-brand " href="/">PatentLink</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="nav nav-pills navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tokens">Tokens</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#explore">Explore</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/patentDeploy">Deploy</a>
+              </li>
+              <li>
+              <a id = "connectbutton" type="button" class="btn btn-secondary" 
+                onClick={connectWalletHandler}
+               >connect wallet
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        
+      </nav>
+
+      <h4 id="explore">
+        <header class="bg-dark" id="header">
+        <div class="container-fluid mt-5">
+          <div class="row gx-2">
+              <div class="my-5 text-xl-start">
+                <h1 class="display-5 fw-bolder text-purple mb-2 shadow p-4" style={{"color": "#6f42c1"}}>Your Patents</h1>
+                <CardTable data={cardData} />
+              </div>
+            </div>
+          </div>
+        </header>
+      </h4>
+
+      <div class="container d-flex align-items-center justify-content-center">
+        <p id="#nocardsflag" style={cardList==[] ? {opacity : 0} : {opacity : 1, color: "#808080"}}> You have no patents :-/ </p>
+      </div>
+      </div>
+
+{/*          
+      <div class = "bg-dark mt-5">
+          <h1>Your Cards</h1>
+          <CardTable  data={cardData} />
+      </div>
+      </div> */}
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      </main>
+     </>
     )
 }
 

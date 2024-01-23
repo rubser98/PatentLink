@@ -1,7 +1,11 @@
 import Head from 'next/head'
+import 'bulma/css/bulma.css'
 import { useState, useEffect,useRef } from 'react'
 import Web3 from 'web3'
 import Swal from 'sweetalert2';
+
+
+
 import styles from '../styles/homeSale.module.css'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 
@@ -37,24 +41,6 @@ const patentDeploy = () =>  {
         }
   
   },[])
-
-
-  const changeConnectButton = async(bool) => {
-  
-    const connectbutton = document.getElementById("connectbutton")
-  
-    if(bool==true){
-      connectbutton.textContent = "MyWallet"
-      connectbutton.style.backgroundColor = "#6f42c1"
-      connectbutton.href = "/myWallet"
-    }
-    else{
-      connectbutton.textContent = "connect wallet"
-      connectbutton.style.backgroundColor = "bg-secondary"
-    }
-  }
-
-  
   const metamaskConnetcionHandler = async() => {
 
     var _web3 = new Web3(window.ethereum)
@@ -63,13 +49,11 @@ const patentDeploy = () =>  {
     if (accounts.length === 0) {
         console.log('Metamask disconnesso');
         setConnection(false)
-        changeConnectButton(false)
         setConteggio("")
 
         
       } else {
         setConnection(true)
-        changeConnectButton(true)
         getMyCountPintHandler(_web3)
       
       }
@@ -79,13 +63,11 @@ const patentDeploy = () =>  {
         if (accounts.length === 0) {
           console.log('Metamask disconnesso');
           setConnection(false)
-          changeConnectButton(false)
           setConteggio("")
 
           
         } else {
           setConnection(true)
-          changeConnectButton(true)
           getMyCountPintHandler(_web3)
         
         }
@@ -235,7 +217,7 @@ const patentDeploy = () =>  {
       count = Number(count)
       count = count / Math.pow(10, 18).toFixed(0)
       console.log(count)
-      setConteggio("this is your amount of PNT : " + count)
+      setConteggio("this is your amount of pint : " + count)
   }
     
     const getMyCountPatentHandler = async (web3) => {
@@ -294,75 +276,77 @@ const patentDeploy = () =>  {
     }
 
     return (
-      <>
-
+<div className={styles.main}>
       <Head>
-        <title>Deploy</title>
+        <title>PatentLink</title>
         <meta name="description" content="home" />
-        <link rel="icon" href="miniCiccio.png" />
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></link>
       </Head>
-      
-      <main class="vh-100 bg bg-dark">
-      <nav id="mynavbar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow p-3 mb-5 fixed-top">
-        <div class="container-fluid">
-        <img width="30px" height="auto" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
-          <a class="navbar-brand " href="/">PatentLink</a>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="nav nav-pills navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/tokens">Tokens</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/explore">Explore</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/patentDeploy">Deploy</a>
-              </li>
-              <li>
-              <a id = "connectbutton" type="button" class="btn btn-secondary" 
-                onClick={connectWalletHandler}
-               >connect wallet
-                </a>
-              </li>
-            </ul>
+
+      <nav className="navbar mt-4 mb-4">
+        <div className='container'>
+          <div className='navbar-brand'>
+            <h1>PatentLink</h1>
+          </div>
+          <div  className='navbar-item'>
+                      <form action="/homeSales">
+                       <button className='button is-primary'> buyPNT</button>
+                      </form>
+
+          </div>
+          <div  className='navbar-item'>
+                      <form action="/">
+                       <button className='button is-primary'> home</button>
+                      </form>
+          </div>
+          <div  className='navbar-item'>
+                      <form action="/myWallet">
+                       <button className='button is-primary'> myWallet</button>
+                      </form>
+           </div>
+          <div  className='navbar-item'>
+                      <form action="/patentGalleryHome">
+                       <button className='button is-primary'> patentGallery</button>
+                      </form>
+          </div>
+          <div className='navbar-end'>
+            <button onClick={connectWalletHandler} 
+                    className='button is-primary'
+                    disabled={isConnectedToMetamask }>
+                    Connect Wallet</button>
           </div>
         </div>
       </nav>
-
-      <div class = "container-fluid mt-5">
-
-      <h4 id="explore">
-        <header class="bg-dark" id="header">
-        <div class="container-fluid mt-5">
-          <div class="row gx-2">
-              <div class="my-5 text-xl-start">
-                <h1 class="display-5 fw-bolder text-purple mb-2 shadow p-4 " style={{"color": "#6f42c1"}}>Deploy your contract</h1>
-              </div>
-            </div>
-          </div>
-        </header>
-      </h4>
+      <section>
+                <div className='container'>
+                    <p> {conteggioPint}</p>
+                </div>
+      </section>
 
       <section>
-          <div className='container'>
-          <h6>Current Filing fee: {totale} PTNT </h6>
-          <h6> {conteggioPint}</h6>
-          </div>
+        <div className='container'>
+          <h2>Filing fee: {totale} PTNT </h2>
+        </div>
       </section>
-      </div>
+      <section>
+        <div className='container'>
+          <h2>Token List</h2>
+          <ul>
+            {patentList.map((patent, index) => (
+              <li key={index}>{patent}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      
 
       <section className='mt-5'>
         <div className='container'>
           <div className='field'>
-            <h6 className='label'>Choose the patent to deploy:</h6>
+            <label className='label'>FILE PATENT</label>
             <div className='control'>
               <input
                 onChange={(e) => setPatentName(e.target.value)}
-                className='input form-control mb-2'
+                className='input'
                 type='text'
                 placeholder='Enter patent name...'
               />
@@ -371,14 +355,14 @@ const patentDeploy = () =>  {
                 accept="application/pdf"
                 onChange={(e) => setPdfFile(e.target.files[0])}
               />
-              </div>
               <button
                 onClick={filePatentHandler}
-                className='btn btn-secondary mt-3'
+                className='button is-primary mt-3'
                 disabled={(!patentName || !pdfFile) || !isConnectedToMetamask }
               >
                 Submit
               </button>
+            </div>
           </div>
         </div>
       </section>
@@ -388,9 +372,8 @@ const patentDeploy = () =>  {
           <p>{error}</p>
         </div>
       </section>
-    
-    </main>
-    </>
+
+    </div>
   )
     
 }

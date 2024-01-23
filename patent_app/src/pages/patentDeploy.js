@@ -4,6 +4,7 @@ import Web3 from 'web3'
 import Swal from 'sweetalert2';
 import styles from '../styles/homeSale.module.css'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
+import styled from "styled-components";
 
 const axios = require('axios')
 const FormData = require('form-data')
@@ -265,6 +266,19 @@ const patentDeploy = () =>  {
         }
 
     }
+
+    const StyledHeading = styled.h1`
+  font-weight: bold;
+  font-size: 60px;
+  background: linear-gradient(176deg, #6f42c1, #32e1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: none;
+`;
+
     const connectWalletHandler = async() => {
 
         try{

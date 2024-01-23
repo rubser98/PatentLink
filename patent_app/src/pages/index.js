@@ -8,6 +8,8 @@ import { useState, useEffect,useRef } from 'react'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import Web3 from 'web3'
 import { purple } from '@mui/material/colors'
+import styled from "styled-components";
+import { ST } from 'next/dist/shared/lib/utils'
 
 
 
@@ -257,6 +259,32 @@ const Home = () =>  {
       }
 
   }
+
+  const StyledHeading = styled.h1`
+  font-weight: bold;
+  font-size: 60px;
+  background: linear-gradient(176deg, #6f42c1, #32e1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: none;
+`;
+
+const StyledHeading2 = styled.h1`
+font-weight: bold;
+font-size: 45px;
+background: linear-gradient(176deg, #6f42c1, #ee438e);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+-webkit-box-decoration-break: clone;
+box-decoration-break: clone;
+text-shadow: none;
+`;
+
+
   const connectWalletHandler = async () => {
 
       try {
@@ -332,7 +360,7 @@ const Home = () =>  {
             <div class="row gx-5 align-items-center justify-content-center">
               <div class="col-lg-8 col-xl-7 col-xxl-6">
                   <div class="my-5 text-center text-xl-start">
-                    <h1 class="display-5 fw-bolder text-white mb-2">A Blockchain platform buying and selling your Patents</h1>
+                    <StyledHeading>A Blockchain platform to buy and sell patents</StyledHeading>
                     <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                         <a class="btn btn-secondary btn-lg px-4 me-sm-3" href="/patentDeploy" style = {{backgroundColor : "#6f42c1"}}>Get Started</a>
@@ -351,12 +379,12 @@ const Home = () =>  {
         
   
   
-      <h4 id="tokens">   
+      <h4 id="tokens" class="pt-5">   
         <div class="container">
           <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                  <h1 class="display-5 fw-bolder text-white mb-2">What is a PNT token?</h1>
+                   <StyledHeading2> What is a PNT token? </StyledHeading2>
                   <p class="lead fw-normal text-white-50 mb-4">ADD DESCRIPTION Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                   
@@ -437,10 +465,11 @@ const Home = () =>  {
           <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
-                  <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1>
-                  <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                  <StyledHeading2>..Start to explore!</StyledHeading2>
+                  {/* <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1> */}
+                  <p class="lead fw-normal text-white-50 mb-4">ADD CARD CAROUSEL</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                      <a class="btn btn-secondary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                      <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg px-4 me-sm-3" href="#features">More</a>
                   
                   </div>
                 </div>

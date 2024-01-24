@@ -364,11 +364,7 @@ const vendite = () =>  {
                 </div>
             </section>
 
-            <section>
-                <div className='container has-text-danger'>
-                    <p>{error}</p>
-                </div>
-            </section>
+          
 
 
         </div>

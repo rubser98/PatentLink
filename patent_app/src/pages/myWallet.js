@@ -41,7 +41,7 @@ const myWallet = () =>  {
       
       const connectbutton = document.getElementById("connectbutton")
 
-      if(bool==true){
+      if(bool===true){
         connectbutton.textContent = "MyWallet"
         connectbutton.style.backgroundColor = "#6f42c1"
         connectbutton.href = "/myWallet"
@@ -53,48 +53,61 @@ const myWallet = () =>  {
     }
 
     const metamaskConnetcionHandler = async() => {
-
       var _web3 = new Web3(window.ethereum)
       const accounts = await _web3.eth.getAccounts() 
-  
+      setWeb3(_web3)
+
+
       if (accounts.length === 0) {
-          console.log('Metamask disconnesso');
-          setConnection(false)
-          changeConnectButton(false)
-          setConteggio("")
-          localStorage.setItem("conteggio","");
-  
-          
-        } else {
-          setConnection(true)
-          changeConnectButton(true)
-          console.log(1)
-          getMyCountPintHandler(_web3)
-        
-        }
-  
+        console.log('Metamask disconnesso');
+        setConnection(false)
+        cardList = []
+        setCard([])
+        changeConnectButton(false)
+        setConteggio("")
+        localStorage.setItem("conteggio","");
+
+      }
+      else
+      {
+        setConnection(true)
+        cardList = []
+        setCard([])
+        changeConnectButton(true)
+        getPatentHandler(_web3)
+        getMyCountPintHandler(_web3)
+
+
+      }
+
       window.ethereum.on('accountsChanged', (accounts) => {
-          
+
           if (accounts.length === 0) {
+            var _web3 = new Web3(window.ethereum)
             console.log('Metamask disconnesso');
+            cardList = []
+            setCard([])
             setConnection(false)
-            changeConnectButton(false)
             setConteggio("")
-            localStorage.setItem("conteggio", "");
-  
-            
+            localStorage.setItem("conteggio","");
+
           } else {
             setConnection(true)
+            cardList = []
+            setCard([])
             changeConnectButton(true)
+            var _web3 = new Web3(window.ethereum)
+            getPatentHandler(_web3)
             getMyCountPintHandler(_web3)
-          
+
           }
       })
-  
-  }  
+
+  } 
  
     useEffect(() => {
       if (!loaded.current) {
+       
         loaded.current = true
         metamaskConnetcionHandler()
       }
@@ -231,7 +244,7 @@ const myWallet = () =>  {
       </h4>
 
       <div class="container d-flex align-items-center justify-content-center">
-        <p id="#nocardsflag" style={cardList==[] ? {opacity : 0} : {opacity : 1, color: "#808080"}}> You have no patents :-/ </p>
+        <p  style={(cardData.length == 0   ?  {display : 'block'} : {display : 'none'})}> You have no patents :-/ </p>
       </div>
       </div>
 

@@ -31,17 +31,7 @@ const Home = () =>  {
   const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
   const [isConnectedToMetamask , setConnection] = useState(false)
 
-useEffect(() => {
 
-      if (!loaded.current) {
-          loaded.current = true
-         
-        
-          getTotaleHandler()
-          metamaskConnetcionHandler()
-        }
-  
-  },[])
 
   const changeConnectButton = async(bool) => {
 
@@ -57,7 +47,6 @@ useEffect(() => {
       connectbutton.style.backgroundColor = "bg-secondary"
     }
   }
-
   const metamaskConnetcionHandler = async() => {
 
     var _web3 = new Web3(window.ethereum)
@@ -70,17 +59,17 @@ useEffect(() => {
         setConteggio("")
         localStorage.getItem("conteggio")
 
-        
+
       } else {
         setConnection(true)
         changeConnectButton(true)
         console.log(1)
         getMyCountPintHandler(_web3)
-      
+
       }
 
     window.ethereum.on('accountsChanged', (accounts) => {
-        
+
         if (accounts.length === 0) {
           console.log('Metamask disconnesso');
           setConnection(false)
@@ -88,17 +77,17 @@ useEffect(() => {
           setConteggio("")
           localStorage.getItem("conteggio")
 
-          
+
         } else {
           setConnection(true)
           changeConnectButton(true)
           getMyCountPintHandler(_web3)
 
-        
+
         }
     })
 
-}  
+}
 
   useEffect(() => {
     if (!loaded.current) {
@@ -108,7 +97,6 @@ useEffect(() => {
 
 
 }, [])
-
   
   const getMyCountPintHandler = async (web3) => {
       

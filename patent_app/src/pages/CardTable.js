@@ -156,7 +156,6 @@ const CardTable = ({ data }) => {
         <Card style={cardStyle}>
           <CardContent>
             <Typography variant="h6">{item.title}</Typography>
-            <Typography variant="body2">{item.description}</Typography>
           </CardContent>
           <Button variant="contained" color="primary"onClick={() => buttonHandlerCard(item.link)}>
             Vai al link

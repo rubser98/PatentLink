@@ -479,13 +479,13 @@ const tokens = () =>  {
                 <a class="nav-link" href="/tokens">Tokens</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/explore">Explore</a>
+                <a class="nav-link" href="/patentGalleryHome">Explore</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/patentDeploy">Deploy</a>
               </li>
               <li>
-              <a id = "connectbutton" type="button" class="btn btn-secondary" 
+              <a id = "connectbutton" type="button" class="btn btn-secondary rounded-pill" 
                 onClick={connectWalletHandler}
                >connect wallet
                 </a>
@@ -526,7 +526,7 @@ const tokens = () =>  {
                                     style = {{backgroundColor : "#6f42c1"}}
                                     onClick={buyPintHandler}
                                     disabled={!isConnectedToMetamask}
-                                    className='btn btn-secondary'
+                                    className='btn btn-secondary rounded-pill'
                                      >
                                     buy</button>
                                     </div>
@@ -544,7 +544,7 @@ const tokens = () =>  {
                                 style = {{backgroundColor : "#6f42c1"}}
                                 onClick={sellPintHandler}
                                 disabled={!isConnectedToMetamask}
-                                className='btn btn-secondary' >
+                                className='btn btn-secondary rounded-pill' >
                                 sell</button>
 
 

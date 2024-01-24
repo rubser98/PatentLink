@@ -68,6 +68,7 @@ useEffect(() => {
         setConnection(false)
         changeConnectButton(false)
         setConteggio("")
+        localStorage.getItem("conteggio")
 
         
       } else {
@@ -85,6 +86,7 @@ useEffect(() => {
           setConnection(false)
           changeConnectButton(false)
           setConteggio("")
+          localStorage.getItem("conteggio")
 
           
         } else {
@@ -118,8 +120,8 @@ useEffect(() => {
       count = Number(count)
       count = (count * Math.pow(10, -18)).toFixed(0)
       console.log(count)
-      //setConteggio(count)
-      setConteggio(localStorage.getItem("conteggio"))
+      setConteggio(count)
+      localStorage.setItem("conteggio",count);
   }
 
   const updatePintQty = event => {
@@ -491,7 +493,7 @@ text-shadow: none;
                   {/* <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1> */}
                   <p class="lead fw-normal text-white-50 mb-4">ADD CARD CAROUSEL</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                      <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3" href="#features">More</a>
+                      <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3" href="/patentGalleryHome">More</a>
                   
                   </div>
                 </div>

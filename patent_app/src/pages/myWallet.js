@@ -33,6 +33,7 @@ const myWallet = () =>  {
       count = count / Math.pow(10, 18).toFixed(0)
       console.log(count)
       setConteggio(count)
+      localStorage.setItem("conteggio",count);
     }
 
     
@@ -61,6 +62,7 @@ const myWallet = () =>  {
           setConnection(false)
           changeConnectButton(false)
           setConteggio("")
+          localStorage.setItem("conteggio","");
   
           
         } else {
@@ -78,6 +80,7 @@ const myWallet = () =>  {
             setConnection(false)
             changeConnectButton(false)
             setConteggio("")
+            localStorage.setItem("conteggio", "");
   
             
           } else {
@@ -192,7 +195,7 @@ const myWallet = () =>  {
                 <a class="nav-link" href="/tokens">Tokens</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#explore">Explore</a>
+                <a class="nav-link" href="/patentGalleryHome">Explore</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/patentDeploy">Deploy</a>

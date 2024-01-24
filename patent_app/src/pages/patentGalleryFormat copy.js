@@ -1,14 +1,10 @@
 // CardTable.js
+import React from 'react';
+import { Card, CardContent, Grid, Typography, Button } from '@mui/material';
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2';
 import Web3 from 'web3'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, Grid} from '@mui/material';
 
 const PatentGalleryFormat = ({ data }) => {
   const buttonHandlerCardLink = (link) => {
@@ -97,9 +93,13 @@ const PatentGalleryFormat = ({ data }) => {
   
  
     const cardStyle = {
-        backgroundColor: '#373e41' ,// Colore di sfondo
+        backgroundColor: '#98fb98', // Colore di sfondo
         borderRadius: '12px', // Angoli arrotondati
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', // Ombra leggera
+        transition: 'transform 0.3s ease-in-out', // Effetto di transizione al passaggio del mouse
+        '&:hover': {
+          transform: 'scale(1.05)', // Ingrandimento al passaggio del mouse
+        },
       };
 
 
@@ -107,29 +107,18 @@ const PatentGalleryFormat = ({ data }) => {
     <Grid container spacing={2}>
     {data.map((item, index) => (
       <Grid key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
-         <Card sx={{ maxWidth: 345 }} style={cardStyle}>
-      <CardActionArea color="text.secondary" onClick={() => buttonHandlerCardLink(item.link)}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5 fw-bold" component="div">
-          {item.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-           {item.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button onClick={() => bidHandler(item.id)} className='btn-sm btn-secondary rounded-pill' size="small" style={{ backgroundColor : "#6f42c1"}}>
-          bid
-        </Button>
-      </CardActions>
-    </Card>
+        <Card style={cardStyle}>
+          <CardContent>
+            <Typography variant="h6">{item.title}</Typography>
+            <Typography variant="body2">{item.description}</Typography>
+            <Button variant="contained" color="primary"onClick={() => buttonHandlerCardLink(item.link)}>
+             vai al link 
+            </Button>
+          </CardContent>
+          <Button variant="contained" color="primary"onClick={() => bidHandler(item.id)}>
+            make a bid
+          </Button>
+        </Card>
       </Grid>
     ))}
   </Grid>)

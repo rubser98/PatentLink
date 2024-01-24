@@ -12,30 +12,44 @@ import  FormData from 'form-data'
 import Home from '.';
 
 
-const changeConnectButton = async(bool) => {
-  
-  const connectbutton = document.getElementById("connectbutton")
-
-  if(bool==true){
-    connectbutton.textContent = "MyWallet"
-    connectbutton.style.backgroundColor = "#6f42c1"
-    connectbutton.href = "/myWallet"
-  }
-  else{
-    connectbutton.textContent = "connect wallet"
-    connectbutton.style.backgroundColor = "bg-secondary"
-  }
-}
 
 const myWallet = () =>  {
-    const loaded  = useRef(false);
+    const [conteggioPint,setConteggio] = useState('')
     var cardList = []
     const [cardData, setCard]  = useState([]);
     const pathBasePinata = "https://gateway.pinata.cloud/ipfs/"
     const [error, setError] = useState('')
     const [isConnectedToMetamask , setConnection] = useState(false)
     const [web3, setWeb3] = useState(null);
+    const loaded  = useRef(false);
 
+    const getMyCountPintHandler = async (web3) => {
+      console.log(web3)
+      const accounts = await web3.eth.getAccounts()
+      console.log(accounts)
+      console.log(accounts[0])
+      var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
+      count = Number(count)
+      count = count / Math.pow(10, 18).toFixed(0)
+      console.log(count)
+      setConteggio(count)
+    }
+
+    
+    const changeConnectButton = async(bool) => {
+      
+      const connectbutton = document.getElementById("connectbutton")
+
+      if(bool==true){
+        connectbutton.textContent = "MyWallet"
+        connectbutton.style.backgroundColor = "#6f42c1"
+        connectbutton.href = "/myWallet"
+      }
+      else{
+        connectbutton.textContent = "connect wallet"
+        connectbutton.style.backgroundColor = "bg-secondary"
+      }
+    }
 
     const metamaskConnetcionHandler = async() => {
 
@@ -53,7 +67,7 @@ const myWallet = () =>  {
           setConnection(true)
           changeConnectButton(true)
           console.log(1)
-          //getMyCountPintHandler(_web3)
+          getMyCountPintHandler(_web3)
         
         }
   
@@ -69,7 +83,7 @@ const myWallet = () =>  {
           } else {
             setConnection(true)
             changeConnectButton(true)
-            //getMyCountPintHandler(_web3)
+            getMyCountPintHandler(_web3)
           
           }
       })
@@ -164,54 +178,10 @@ const myWallet = () =>  {
 
         <main class="vh-100 bg bg-dark">
         <div class = "bg-dark">
-            {/* <nav className="navbar mt-4 mb-4">
-                <div className='container'>
-                    <div className='navbar-brand ml-15'>
-                        <h1>myWallet</h1>
-                    </div>
-                    <div  className='navbar-item'>
-                      <form action="/homeSales">
-                       <button className='button is-primary'> buyPNT</button>
-                      </form>
-
-                    </div>
-                    <div  className='navbar-item'>
-                      <form action="/">
-                       <button className='button is-primary'> home</button>
-                      </form>
-
-                    </div>
-                    
-                    <div  className='navbar-item'>
-                      <form action="/patentDeploy">
-                       <button className='button is-primary'> patentDeployHome</button>
-                      </form>
-
-                    </div>
-                    <div  className='navbar-item'>
-                      <form action="/patentGalleryHome">
-                       <button className='button is-primary'> patentGallery</button>
-                      </form>
-
-                    </div>
-                   
-                    <div className='navbar-end'>
-                        <button
-                            disabled={isConnectedToMetamask}
-                            onClick={connectWalletHandler}
-                            className='button is-primary'>connect wallet
-                            
-                        </button>
-
-                    </div>
-
-                </div>
-                
-
-            </nav> */}
+        
         <nav id="mynavbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow p-3 mb-5 rounded">
         <div class="container-fluid">
-        <img width="30px" height="auto" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
+        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/8757/8757988.png"></img>
           <a class="navbar-brand " href="/">PatentLink</a>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav nav-pills navbar-nav ms-auto">
@@ -219,7 +189,7 @@ const myWallet = () =>  {
                 <a class="nav-link" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#tokens">Tokens</a>
+                <a class="nav-link" href="/tokens">Tokens</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#explore">Explore</a>
@@ -228,10 +198,16 @@ const myWallet = () =>  {
                 <a class="nav-link" href="/patentDeploy">Deploy</a>
               </li>
               <li>
-              <a id = "connectbutton" type="button" class="btn btn-secondary" 
+              <a id = "connectbutton" type="button" class="btn btn-secondary rounded-pill" 
                 onClick={connectWalletHandler}
                >connect wallet
                 </a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link fw-bolder white"  href="/patentDeploy"> {conteggioPint}</button>
+              </li>
+              <li class="nav-item mt-1">
+                <img width="30px" style={isConnectedToMetamask==false ? {opacity:0} : {opacity:1}} src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
               </li>
             </ul>
           </div>

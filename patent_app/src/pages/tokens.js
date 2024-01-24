@@ -12,9 +12,9 @@ const FormData = require('form-data')
 const JWT = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiJiZTVkNzJmYS1mYjQ4LTQzNTEtODg0Zi04MzM4ZWYxN2NjZTUiLCJlbWFpbCI6InJ1YnNlcjE3QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJlY2QzMzRiNWE5NmVkNzAyNmJlYyIsInNjb3BlZEtleVNlY3JldCI6IjI2OTYwYzVkYzBjOGMzM2IwZWRiOTViZjJlZWNjNDk4NGU0ZDNjNTg2NDI3NzAwMDU2ZWJmYTc4MGQxZTU5NTciLCJpYXQiOjE3MDU2MTQ3MDd9.foWHUEjEDthFx-rZyff6Rb7hPiLkfARkHtS4NKblKo4'
 
 
-const patentDeploy = () =>  {
+const tokens = () =>  {
  
-    
+    const loaded  = useRef(false)
     const [error, setError] = useState('')
     const [totale,setTotale] = useState(0)
     const [conteggioPint,setConteggio] = useState('')
@@ -22,8 +22,14 @@ const patentDeploy = () =>  {
     const [patentName, setPatentName] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
     const [patentList, setPatentList] = useState([])
+    const [buyCount, setBuyCount] = useState(0)
+    const [etherCount, setEtherCount] = useState('')
+    const [etherSellCount, setSellEtherCount] = useState('')
+    const [sellCount, setsellCount] = useState(0)
+    const [isBottoneBuyAbilitato, setIsBottoneBuyAbilitato] = useState(false);
+    const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
     const [isConnectedToMetamask , setConnection] = useState(false)
-    const loaded  = useRef(false);
+
   
 
    
@@ -66,6 +72,7 @@ const patentDeploy = () =>  {
         setConnection(false)
         changeConnectButton(false)
         setConteggio("")
+        localStorage.setItem("conteggio", "");
 
         
       } else {
@@ -82,6 +89,7 @@ const patentDeploy = () =>  {
           setConnection(false)
           changeConnectButton(false)
           setConteggio("")
+          localStorage.setItem("conteggio", "");
 
           
         } else {
@@ -236,8 +244,8 @@ const patentDeploy = () =>  {
       count = Number(count)
       count = count / Math.pow(10, 18).toFixed(0)
       console.log(count)
-      //setConteggio(count)
-      setConteggio(localStorage.getItem("conteggio"))
+      setConteggio(count)
+      localStorage.setItem("conteggio",count);
   }
     
     const getMyCountPatentHandler = async (web3) => {
@@ -279,6 +287,145 @@ const patentDeploy = () =>  {
   box-decoration-break: clone;
   text-shadow: none;
 `;
+
+    const sellPintHandler = async () => {
+      var _web3 = new Web3(window.ethereum)
+      console.log(_web3)
+      //web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts()
+
+
+      console.log(etherSellCount)
+      console.log(sellCount)
+      Swal.fire({
+          title: 'Vuoi procedere?',
+          text: 'Stai per vendere ' + etherSellCount + ' PNT al prezzo di ' + etherSellCount + ' ETH!',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sì, procedi!'
+      })
+          .then(async (result) => {
+              if (result.isConfirmed) {
+                  // Azione quando l'utente clicca su "Sì, procedi!"
+                  try {
+
+                      console.log(accounts[0])
+
+
+                      await patentTokenContract.methods.sellToken(sellCount).send({ from: accounts[0] })
+                          .then(function (receipt) {
+                              // Gestione del successo
+                              Swal.fire({
+                                  icon: 'success',
+                                  title: 'Operazione completata!',
+                                  text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'OK'
+                              })
+                              getMyCountPintHandler(_web3)
+                          })
+                          .catch(function (error) {
+                              // Gestione dell'errore
+                              console.log(error)
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Operazione andata in errore!',
+                                  text: 'Errore durante l\'invio della transazione: ' + (error.data === undefined ? error : error.data.message) + "\n: insert a lower number of token",
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'OK'
+                              })
+                          });
+
+                  }
+                  catch (err) {
+                      console.log(err)
+                      setError(err + "")
+                  }
+
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  // Azione quando l'utente clicca su "Annulla"
+                  Swal.fire('Annullato', 'La tua azione è stata annullata.', 'info');
+              }
+          });
+
+
+
+    }
+
+    const buyPintHandler = async () => {
+          
+      //web3 = new Web3(window.ethereum)
+      var _web3 = new Web3(window.ethereum)
+      const accounts = await _web3.eth.getAccounts()
+      console.log(buyCount)
+      console.log(etherCount)
+
+      try {
+
+          console.log(accounts[0])
+          const transactionObject = {
+              from: accounts[0],
+              to: patentTokenContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
+              gas: '300000',  // Gas limit
+              value: _web3.utils.toWei(etherCount, "ether"),
+              data: patentTokenContract.methods.buyToken(Number(buyCount)).encodeABI(), // Includi il metodo e i suoi parametri
+          };
+          _web3.eth.sendTransaction(transactionObject)
+              .then(function (receipt) {
+                  // Gestione del successo
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Operazione completata!',
+                      text: 'Transazione confermata. Hash della transazione: ' + receipt.transactionHash,
+                      confirmButtonColor: '#3085d6',
+                      confirmButtonText: 'OK'
+                  })
+                  getMyCountPintHandler(_web3)
+
+              })
+              .catch(function (error) {
+                  // Gestione dell'errore
+                  console.log(error)
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Operazione andata in errore!',
+                      text: 'Errore durante l\'invio della transazione: ' + error.data.message,
+                      confirmButtonColor: '#3085d6',
+                      confirmButtonText: 'OK'
+                  })
+              });
+
+
+
+      }
+      catch (err) {
+          console.log(err)
+          setError(err + "")
+      }
+
+
+    }
+
+    const updatePintQty = event => {
+          
+      //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
+      setBuyCount((event.target.value * Math.pow(10, 18)).toFixed(0))
+      //inserimento del costo in ETH
+      setEtherCount(event.target.value)
+      console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
+      
+
+
+    }
+    const updatePintQtySell = event => {
+      //function needed to save the amount of tokens written on the input form by the user (this value will be usefull in the buyPintHandler)
+      setsellCount((event.target.value * Math.pow(10, 18)).toFixed(0))
+      setSellEtherCount(event.target.value)
+      console.log((event.target.value * Math.pow(10, 18)).toFixed(0))
+
+    }
 
     const connectWalletHandler = async() => {
 
@@ -338,7 +485,7 @@ const patentDeploy = () =>  {
                 <a class="nav-link" href="/patentDeploy">Deploy</a>
               </li>
               <li>
-              <a id = "connectbutton" type="button" class="btn btn-secondary rounded-pill" 
+              <a id = "connectbutton" type="button" class="btn btn-secondary" 
                 onClick={connectWalletHandler}
                >connect wallet
                 </a>
@@ -361,54 +508,55 @@ const patentDeploy = () =>  {
         <div class="container-fluid mt-5">
           <div class="row gx-2">
               <div class="my-5 text-xl-start">
-                <h1 class="display-5 fw-bolder text-purple mb-2 shadow p-4 " style={{"color": "#6f42c1"}}>Deploy your contract</h1>
+                <h1 class="display-5 fw-bolder text-purple mb-2 shadow p-4 " style={{"color": "#6f42c1"}}>Tokens</h1>
               </div>
             </div>
           </div>
         </header>
       </h4>
+    </div>
+    
+    <section className='mt-5'>
+                            <div className='container'>
+                                <div className='field'>
+                                <label className='label'> BUY PNT</label>
+                                <div className='control'>
+                                <input onChange={updatePintQty} className='input form-control mb-2' type='type' placeholder='Enter amount...' />
+                                <button 
+                                    style = {{backgroundColor : "#6f42c1"}}
+                                    onClick={buyPintHandler}
+                                    disabled={!isConnectedToMetamask}
+                                    className='btn btn-secondary'
+                                     >
+                                    buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </section>
 
-      <section>
-          <div className='container'>
-          <h4 class = "fw-bold shadow p-4" style = {{ color: "#f400a1"}}>Current Filing fee: {totale} PNT </h4>
-          </div>
-      </section>
-      </div>
+                            <section className='mt-5'>
+                            <div className='container'>
+                            <div className='field'>
+                            <label className='label'> SELL PNT</label>
+                            <div className='control'>
+                            <input onChange={updatePintQtySell} className='input form-control mb-2' type='type' placeholder='Enter amount...' />
+                            <button
+                                style = {{backgroundColor : "#6f42c1"}}
+                                onClick={sellPintHandler}
+                                disabled={!isConnectedToMetamask}
+                                className='btn btn-secondary' >
+                                sell</button>
 
-      <section className='mt-5'>
-        <div className='container'>
-          <div className='field'>
-            <h6 className='label .text-white'>File your patent:</h6>
-            <div className='control'>
-              <input
-                onChange={(e) => setPatentName(e.target.value)}
-                className='input form-control mb-2'
-                type='text'
-                placeholder='Enter patent name...'
-              />
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setPdfFile(e.target.files[0])}
-              />
-              </div>
-              <button
-                style = {{backgroundColor : "#6f42c1"}}
-                onClick={filePatentHandler}
-                className='btn btn-secondary mt-3 rounded-pill'
-                disabled={(!patentName || !pdfFile) || !isConnectedToMetamask }
-              >
-                Submit
-              </button>
-          </div>
-        </div>
-      </section>
 
-      <section>
-        <div className='container has-text-danger'>
-          <p>{error}</p>
-        </div>
-      </section>
+                            </div>
+                            </div>
+                            </div>
+                            </section>
+
+    
+      
+
+      
     
     </main>
     </>
@@ -416,4 +564,4 @@ const patentDeploy = () =>  {
     
 }
 
-export default patentDeploy
+export default tokens

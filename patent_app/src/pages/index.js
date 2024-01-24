@@ -14,21 +14,24 @@ import { ST } from 'next/dist/shared/lib/utils'
 
 
 const Home = () =>  {
-  const loaded  = useRef(false);
+
+  const loaded  = useRef(false)
   const [error, setError] = useState('')
   const [totale, setTotale] = useState(0)
   const [conteggioPint, setConteggio] = useState('')
+  const [web3, setWeb3] = useState(null)
+  const [patentName, setPatentName] = useState(null)
+  const [pdfFile, setPdfFile] = useState(null)
+  const [patentList, setPatentList] = useState([])
   const [buyCount, setBuyCount] = useState(0)
   const [etherCount, setEtherCount] = useState('')
-  const [web3, setWeb3] = useState(null);
   const [etherSellCount, setSellEtherCount] = useState('')
   const [sellCount, setsellCount] = useState(0)
   const [isBottoneBuyAbilitato, setIsBottoneBuyAbilitato] = useState(false);
   const [isBottoneSellAbilitato, setIsBottoneSellAbilitato] = useState(false);
   const [isConnectedToMetamask , setConnection] = useState(false)
 
-
-  useEffect(() => {
+useEffect(() => {
 
       if (!loaded.current) {
           loaded.current = true
@@ -70,6 +73,7 @@ const Home = () =>  {
       } else {
         setConnection(true)
         changeConnectButton(true)
+        console.log(1)
         getMyCountPintHandler(_web3)
       
       }
@@ -87,11 +91,21 @@ const Home = () =>  {
           setConnection(true)
           changeConnectButton(true)
           getMyCountPintHandler(_web3)
+
         
         }
     })
 
-}
+}  
+
+  useEffect(() => {
+    if (!loaded.current) {
+      loaded.current = true
+      metamaskConnetcionHandler()
+    }
+
+
+}, [])
 
   
   const getMyCountPintHandler = async (web3) => {
@@ -104,7 +118,8 @@ const Home = () =>  {
       count = Number(count)
       count = (count * Math.pow(10, -18)).toFixed(0)
       console.log(count)
-      setConteggio("this is your amount of pint : " + count)
+      //setConteggio(count)
+      setConteggio(localStorage.getItem("conteggio"))
   }
 
   const updatePintQty = event => {
@@ -325,7 +340,7 @@ text-shadow: none;
         <main class="bg-dark">
         <nav id="mynavbar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow p-3 mb-5 fixed-top">
         <div class="container-fluid">
-        <img width="30px" height="auto" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
+        <img width="30px" height="auto" src="https://cdn-icons-png.flaticon.com/512/8757/8757988.png"></img>
           <a class="navbar-brand " href="#Home">PatentLink</a>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="nav nav-pills navbar-nav ms-auto">
@@ -342,10 +357,16 @@ text-shadow: none;
                 <a class="nav-link" href="/patentDeploy">Deploy</a>
               </li>
               <li>
-              <a id = "connectbutton" type="button" class="btn btn-secondary" 
+              <a id = "connectbutton" type="button" class="btn btn-secondary rounded-pill" 
                 onClick={connectWalletHandler}
                >connect wallet
                 </a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link fw-bolder white"  href="/patentDeploy"> {conteggioPint}</button>
+              </li>
+              <li class="nav-item mt-1">
+                <img width="30px" style={isConnectedToMetamask==false ? {opacity:0} : {opacity:1}} src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp"></img>
               </li>
             </ul>
           </div>
@@ -355,7 +376,7 @@ text-shadow: none;
       
             
       <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-          <h4 id="home"><header class="py-5 bg-dark" id="header">
+          <h4 id="home"><header class="py-5" id="header">
           <div class="container px-5">
             <div class="row gx-5 align-items-center justify-content-center">
               <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -363,13 +384,13 @@ text-shadow: none;
                     <StyledHeading>A Blockchain platform to buy and sell patents</StyledHeading>
                     <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-secondary btn-lg px-4 me-sm-3" href="/patentDeploy" style = {{backgroundColor : "#6f42c1"}}>Get Started</a>
+                        <a class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3" href="/patentDeploy" style = {{backgroundColor : "#6f42c1"}}>Get Started</a>
                     
                     </div>
                   </div>
                 </div>
                 <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                <img class="img-fluid rounded-3 my-5" src="https://cdn-icons-png.flaticon.com/512/8757/8757988.png" alt="...">
+                <img width="700" height="auto" class="img-fluid rounded-3 my-5" src="logoHome3.png" alt="...">
                   </img>
                 </div>
               </div>
@@ -385,14 +406,14 @@ text-shadow: none;
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-5 text-center text-xl-start">
                    <StyledHeading2> What is a PNT token? </StyledHeading2>
-                  <p class="lead fw-normal text-white-50 mb-4">ADD DESCRIPTION Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                  <p class="lead fw-normal text-white-50 mb-4"> --Credits to Polygon Technology-- Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                   
-                    <button style = {{backgroundColor : "#6f42c1"}} type="button" onClick={connectWalletHandler} class="btn btn-secondary btn-lg px-4 me-sm-3" data-toggle="modal" data-target="#exampleModal">
+                    <a href="/tokens" style = {{backgroundColor : "#6f42c1"}} type="button" onClick={connectWalletHandler} class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3">
                       Buy or sell
-                    </button>
+                    </a>
   
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content bg-dark">
                           <div class="modal-header">
@@ -450,8 +471,9 @@ text-shadow: none;
                   </div>
                 </div>
               </div>
+              
               <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-              <img width="300" height="auto" class="img-fluid rounded-3 my-5" src="https://altcoinsbox.com/wp-content/uploads/2023/03/matic-logo.webp" alt="...">
+              <img width="400" height="auto" class="img-fluid rounded-3 my-5" src="token.png" alt="...">
               </img>
               </div>
             </div>
@@ -460,7 +482,7 @@ text-shadow: none;
         
   
         <h4 id="explore">
-        <header class="py-5 bg-dark" id="header">
+        <header class="py-5" id="header">
         <div class="container px-5">
           <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -469,7 +491,7 @@ text-shadow: none;
                   {/* <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1> */}
                   <p class="lead fw-normal text-white-50 mb-4">ADD CARD CAROUSEL</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                      <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg px-4 me-sm-3" href="#features">More</a>
+                      <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3" href="#features">More</a>
                   
                   </div>
                 </div>
@@ -489,9 +511,7 @@ text-shadow: none;
       
   
   
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
       </main>
       </>
     )

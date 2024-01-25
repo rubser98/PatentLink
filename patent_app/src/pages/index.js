@@ -14,11 +14,10 @@ import { ST } from 'next/dist/shared/lib/utils'
 
 
 const Home = () =>  {
-
+  const [conteggioPint,setConteggio] = useState('')
   const loaded  = useRef(false)
   const [error, setError] = useState('')
   const [totale, setTotale] = useState(0)
-  const [conteggioPint, setConteggio] = useState('')
   const [web3, setWeb3] = useState(null)
   const [patentName, setPatentName] = useState(null)
   const [pdfFile, setPdfFile] = useState(null)
@@ -47,6 +46,7 @@ const Home = () =>  {
       connectbutton.style.backgroundColor = "bg-secondary"
     }
   }
+
   const metamaskConnetcionHandler = async() => {
 
     var _web3 = new Web3(window.ethereum)
@@ -57,7 +57,7 @@ const Home = () =>  {
         setConnection(false)
         changeConnectButton(false)
         setConteggio("")
-        localStorage.getItem("conteggio")
+        localStorage.setItem("conteggio","");
 
 
       } else {
@@ -75,7 +75,7 @@ const Home = () =>  {
           setConnection(false)
           changeConnectButton(false)
           setConteggio("")
-          localStorage.getItem("conteggio")
+          localStorage.setItem("conteggio","");
 
 
         } else {
@@ -90,26 +90,26 @@ const Home = () =>  {
 }
 
   useEffect(() => {
-    if (!loaded.current) {
-      loaded.current = true
-      metamaskConnetcionHandler()
-    }
+      if (!loaded.current) {
+       
+        loaded.current = true
+        metamaskConnetcionHandler()
+      }
 
 
-}, [])
+  }, [])
   
   const getMyCountPintHandler = async (web3) => {
-      
-      //funzione che serve a prendere in visualizzazione il propprio numero di PNT
-      const accounts = await web3.eth.getAccounts()
-      console.log(accounts)
-      console.log(accounts[0])
-      var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
-      count = Number(count)
-      count = (count * Math.pow(10, -18)).toFixed(0)
-      console.log(count)
-      setConteggio(count)
-      localStorage.setItem("conteggio",count);
+    console.log(web3)
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
+    console.log(accounts[0])
+    var count = await patentTokenContract.methods.balanceOf(accounts[0]).call()
+    count = Number(count)
+    count = count / Math.pow(10, 18).toFixed(0)
+    console.log(count)
+    setConteggio(count)
+    localStorage.setItem("conteggio",count);
   }
 
   const updatePintQty = event => {
@@ -479,7 +479,7 @@ text-shadow: none;
                 <div class="my-5 text-center text-xl-start">
                   <StyledHeading2>..Start to explore!</StyledHeading2>
                   {/* <h1 class="display-5 fw-bolder text-white mb-2">...Start to explore!</h1> */}
-                  <p class="lead fw-normal text-white-50 mb-4">ADD CARD CAROUSEL</p>
+                  <p class="lead fw-normal text-white-50 mb-4"> See what new on PatentLink</p>
                   <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                       <a style = {{backgroundColor : "#6f42c1"}} class="btn btn-secondary btn-lg rounded-pill px-4 me-sm-3" href="/patentGalleryHome">More</a>
                   
@@ -487,7 +487,7 @@ text-shadow: none;
                 </div>
               </div>
               <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-              <img class="img-fluid rounded-3 my-5" src="https://cdn-icons-png.flaticon.com/512/8757/8757988.png" alt="...">
+              <img width="700" height="auto" class="img-fluid rounded-3 my-5" src="explore.png" alt="...">
                 </img>
               </div>
             </div>

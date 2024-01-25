@@ -1,17 +1,11 @@
 // CardTable.js
 import React from 'react';
-import { Grid,Button, dividerClasses } from '@mui/material';
-import {CardActionArea, CardActions} from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import { Card, CardContent, Grid, Typography, Button, dividerClasses } from '@mui/material';
 import { useState, useEffect } from 'react'
 import {patentTokenContract, patentNFTContract} from '../../blockchain/contract_pinning'
 import Swal from 'sweetalert2';
 import Web3 from 'web3'
 var prova = ""
-import Head from 'next/head'
 
 const CardTable = ({ data }) => {
 
@@ -140,85 +134,73 @@ const CardTable = ({ data }) => {
    
   
  
-  const cardStyle = {
-    backgroundColor: '#373e41' ,// Colore di sfondo
-    borderRadius: '12px', // Angoli arrotondati
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', // Ombra leggera
-  };
+    const cardStyle = {
+        backgroundColor: '#98fb98', // Colore di sfondo
+        borderRadius: '12px', // Angoli arrotondati
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Ombra leggera
+        transition: 'transform 0.3s ease-in-out', // Effetto di transizione al passaggio del mouse
+        '&:hover': {
+          transform: 'scale(1.05)', // Ingrandimento al passaggio del mouse
+        },
+      };
 
 
   return (
-    <div class="container-fluid mt-4">
+    
     <Grid container spacing={2}>
     {
      
     data.map((item, index) => (
-      <Grid  style={{ display: isVisiblePatents ? 'block' : 'none' }}  key={index} item xs={12} sm={100} md={4} lg={3} xl={2}>
-          <Card sx={{ maxWidth: 345 }} style={cardStyle}>
-      <CardActionArea color="text.secondary" onClick={() => buttonHandlerCard(item.link)}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5 fw-bold" component="div" color="">
-          {item.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-           {item.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button onClick={() => buttonHandlerBids(item.sender, item.id)} className='btn-sm btn-secondary rounded-pill' size="small" style={{ backgroundColor : "#6f42c1"}}>
-          BIDS
-        </Button>
-      </CardActions>
-    </Card>
-    </Grid>
+      <Grid  style={{ display: isVisiblePatents ? 'block' : 'none' }}  key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
+       
+        <Card style={cardStyle}>
+          <CardContent>
+            <Typography variant="h6">{item.title}</Typography>
+          </CardContent>
+          <Button variant="contained" color="primary"onClick={() => buttonHandlerCard(item.link)}>
+            Vai al link
+          </Button>
+          <Button variant="contained" color="primary"onClick={() => buttonHandlerBids(item.sender, item.id)}>
+            Vedi offerte
+          </Button>
+        </Card>
+      </Grid>
 
     ))}
-    {   
-      <div>
-       <Button className = "btn-sm btn-secondary rounded-pill" style={{ display: isVisibleBids ? 'block' : 'none'  , backgroundColor : "#6f42c1", opacity:0.5} } variant="secondary" onClick={handleGoBack}>
-       ⬅ back
+    {
+       <Button style={{ display: isVisibleBids ? 'block' : 'none' }} variant="secondary" onClick={handleGoBack}>
+         Torna indietro
        </Button>
-       </div>
     }
     {
   
     dataBids.map((item, index) => (
-      <Grid  style={{ display: isVisibleBids ? 'block' : 'none' }} key={index} item xs={12} sm={6} md={4} lg={3} xl={3}>
+      <Grid  style={{ display: isVisibleBids ? 'block' : 'none' }} key={index} item xs={12} sm={6} md={4} lg={3} xl={2}>
        
-        <Card sx={{ width: 355 }} style={cardStyle}>
-         
-          <Button className = "btn-sm btn-secondary rounded-pill" style={{ display: Number(item.state == 2) ? 'block' : 'none' , backgroundColor : "#4d2e87"}} variant="contained" onClick={() => rejectBidHandler ( item.id, index, item.sender)}>
-            X
-          </Button>
-          <CardContent style={{ opacity: item.state == 2 ? '1' : '0.2'}}>
-            <Typography variant="h9"> Offerta N.{index + 1}</Typography>
+        <Card style={cardStyle}>
+          <CardContent>
+            <Typography variant="h6"> Offerta N.{index + 1}</Typography>
             <Typography variant="h6"> id NFT : {Number(item.id)}</Typography>
             <Typography variant="h6"> Amount : {Number(item.amount)*Math.pow(10,-18)} PNT </Typography>
             <Typography variant="body2">Bidder : {item.bidder}</Typography>
           </CardContent>
-          <div style={{display: "flex", gap: "160px" }}>
-          <Button  className = "btn-sm btn-secondary rounded-pill ml-2" style={{ display: Number(item.state == 2) ? 'block' : 'none', backgroundColor : "#6f42c1"}} variant="contained" onClick={() => acceptBidHandler(item.id, index, item.sender)}>
+          <div style={{display: "flex",gap: "160px" }}>
+          <Button  style={{ display: Number(item.state == 2) ? 'block' : 'none' }}variant="contained" color="primary"onClick={() => acceptBidHandler(item.id, index, item.sender)}>
             Accept
           </Button>
-          {/* <Button className = "btn-sm btn-secondary rounded-pill" style={{ display: Number(item.state == 2) ? 'block' : 'none' , backgroundColor : "#4d2e87"}} variant="contained" onClick={() => rejectBidHandler ( item.id, index, item.sender)}>
+          <Button style={{ display: Number(item.state == 2) ? 'block' : 'none' }} variant="contained" color="primary"onClick={() => rejectBidHandler ( item.id, index, item.sender)}>
             Reject
-          </Button> */} 
-          <span style={{ display: item.state == 1 ? 'block' : 'none' , color : '#D9027D'}}>ACCEPTED</span> 
-          {/* <span style={{ display: item.state == 0 ? 'block' : 'none'}}>REJECTED</span>    */}
+          </Button>
+          <span style={{ display: item.state == 0 ? 'block' : 'none' , color : 'red'}}>REJECTED</span> 
+          <span style={{ display: item.state == 1 ? 'block' : 'none' , color : 'green'}}>ACCEPTED</span> 
           </div>
+          
         </Card>
       </Grid>
+
     ))}
     
   </Grid>
-  </div>
   )
 };
 

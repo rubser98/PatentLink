@@ -101,6 +101,7 @@ const myWallet = () =>  {
             getMyCountPintHandler(_web3)
 
           }
+          window.location.reload()
       })
 
   } 
@@ -161,7 +162,10 @@ const myWallet = () =>  {
           const patent = await patentNFTContract.methods.getPatent(patentList[i]).call()
           console.log(patent)
           const patentURI = await patentNFTContract.methods.tokenURI(patentList[i]).call()
-          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: patentList[i], sender: accounts[0]}
+          var date = new Date( Number((patent.timestamp + "").replace("n","")) * 1000 )
+          var deadline = new Date( Number((patent.deadline + "").replace("n","")) * 1000 )
+          
+          var brevetto =   {timestamp : date, deadline : deadline , title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: patentList[i], sender: accounts[0]}
           cardList.push(brevetto)
           
         

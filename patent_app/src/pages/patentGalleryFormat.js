@@ -20,20 +20,12 @@ const PatentGalleryFormat = ({ data }) => {
 
 
       var web3 = new Web3(window.ethereum)
+      console.log(id)
       const accounts = await web3.eth.getAccounts()
       var address = await patentNFTContract.methods.ownerOf(id).call() 
       console.log(address)
       console.log('make bid: ', accounts[0], id)
-      //var test = await patentNFTContract.methods.getBids(id).call({from : accounts[0], gas:300000})
-      //console.log(test)
       
-     /*
-      const transactionObject = {
-        from: accounts[0],
-        to: patentNFTContract.options.address, //sepolia patent NFT : "0x663b027771c4c3e77d2AB35aE7eF44024C5C68B7",
-        gas: '300000',  // Gas limit
-        data: patentNFTContract.methods.makeBid(,1).encodeABI(), // Includi il metodo e i suoi parametri
-    }; */
       Swal.fire({
         title: 'Inserisci una cifra in PNT:',
         input: 'number',
@@ -119,8 +111,14 @@ const PatentGalleryFormat = ({ data }) => {
           <Typography gutterBottom variant="h5 fw-bold" component="div">
           {item.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-           {item.description}
+        
+          <Typography gutterBottom variant="body2" component="div" color="">
+          <h6>Data di caricamento del brevetto: </h6>
+          {item.timestamp + ""}
+          </Typography>
+          <Typography gutterBottom variant="body2" component="div" color="">
+          <h6>Data di scadenza del brevetto: </h6>
+          {item.deadline + ""}
           </Typography>
         </CardContent>
       </CardActionArea>

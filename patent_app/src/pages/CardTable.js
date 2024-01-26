@@ -78,6 +78,7 @@ const CardTable = ({ data }) => {
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'OK'
     }).then(result => {
+      window.location.reload()
       
       
     })
@@ -166,9 +167,15 @@ const CardTable = ({ data }) => {
           <Typography gutterBottom variant="h5 fw-bold" component="div" color="">
           {item.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-           {item.description}
+          <Typography gutterBottom variant="body2" component="div" color="">
+          <h6>Data di caricamento del brevetto: </h6>
+          {item.timestamp + ""}
           </Typography>
+          <Typography gutterBottom variant="body2" component="div" color="">
+          <h6>Data di scadenza del brevetto: </h6>
+          {item.deadline + ""}
+          </Typography>
+         
         </CardContent>
       </CardActionArea>
       <CardActions>

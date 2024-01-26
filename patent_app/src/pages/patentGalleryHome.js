@@ -175,7 +175,9 @@ const patentGallery = () =>  {
         if (!patentList.includes(BigInt(i))){
           const patent = await patentNFTContract.methods.getPatent(i).call()
           const patentURI = await patentNFTContract.methods.tokenURI(i).call()
-          var brevetto =   { title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: i}
+          var date = new Date( Number((patent.timestamp + "").replace("n","")) * 1000 )
+          var deadline = new Date( Number((patent.deadline + "").replace("n","")) * 1000 )
+          var brevetto =   {timestamp : date, deadline : deadline , title: patent.name, description: 'Descrizione della card 1' , link : pathBasePinata +  patentURI, id: i, sender: accounts[0]}
           cardList.push(brevetto)
         }
       
